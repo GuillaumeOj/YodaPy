@@ -17,7 +17,7 @@ YodaPy is a project for the Python path from [OpenClassrooms](https://openclassr
 # III. How to use?
 [⇧ *Top*](#contents-page)
 
-# IV. Todo list
+# IV. To do list
 [⇧ *Top*](#contents-page)
 
 See my [Trello](https://trello.com/b/P17ksldE/yodapy)
