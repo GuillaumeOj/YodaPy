@@ -1,4 +1,4 @@
-# Content page
+# Contents page
 - [I. What is YodaPy?](#i-what-is-yodapy)
 - [II. How to install?](#ii-how-to-install)
 - [III. How to use?](#iii-how-to-use)
