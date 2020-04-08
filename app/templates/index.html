@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div id="feed">
+            {% for message in messages: %}
+                {% include '_message.html' %}
+            {% endfor %}
+        </div>
+        <div id="writing"></div>
+{% endblock %}

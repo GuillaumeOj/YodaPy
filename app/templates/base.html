@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        {% if title: %}
+        <title>{{ title }} - {{ config['BOT_NAME'] }}</title>
+        {% else: %}
+        <title>{{ config['BOT_NAME'] }}</title>
+        {% endif %}
+    </head>
+    <body>
+        <header>
+            <div id="logo"><img src="{{ config['LOGO'] }}" alt="logo" /></div>
+            <h1>{{ config['CATCHPHRASE'] }}</h1>
+        </header>
+    {% block content %}{% endblock %}
+        <footer>
+            {% if config['PROFILE_LINK']: %}
+            <div id="author">Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a></div>
+            {% else: %}
+            <div id="author">Réalisé par {{ config['AUTHOR'] }}</div>
+            {% endif %}
+            <ul id="social_links">
+                {% for link in config['SOCIAL_LINKS'] %}
+                <li><a href="{{ link['url'] }}">{{ link['name'] }}</a></li>
+                {% endfor %}
+            </ul>
+    </body>
+</html>
