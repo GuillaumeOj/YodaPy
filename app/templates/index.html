@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <div id="feed">
+        <div id="content">
+            <div id="feed">
             {% for message in messages: %}
                 {% include '_message.html' %}
             {% endfor %}
-        </div>
-        <div id="writing">
+            </div>
+            <div id="writing">
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 {{ form.message() }}
                 {{ form.submit() }}
             </form>
+            </div>
         </div>
 {% endblock %}

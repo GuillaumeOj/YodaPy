@@ -6,23 +6,33 @@
         {% else: %}
         <title>{{ config['BOT_NAME'] }}</title>
         {% endif %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/nerd-fonts.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
-        <header>
-            <div id="logo"><img src="{{ config['LOGO'] }}" alt="logo" /></div>
-            <h1>{{ config['CATCHPHRASE'] }}</h1>
-        </header>
-    {% block content %}{% endblock %}
-        <footer>
-            {% if config['PROFILE_LINK']: %}
-            <div id="author">Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a></div>
-            {% else: %}
-            <div id="author">Réalisé par {{ config['AUTHOR'] }}</div>
-            {% endif %}
-            <ul id="social_links">
-                {% for link in config['SOCIAL_LINKS'] %}
-                <li><a href="{{ link['url'] }}">{{ link['name'] }}</a></li>
-                {% endfor %}
-            </ul>
+	<div id="container">
+	    <header>
+		<div id="logo"><img src="{{ config['LOGO'] }}" alt="logo" /></div>
+		<div id="catchphrase">
+		    <h1>{{ config['BOT_NAME'] }}</h1>
+		    <h2>{{ config['CATCHPHRASE'] }}</h2>
+		</div>
+	    </header>
+	    {% block content %}{% endblock %}
+	    <footer>
+		<div id="author">
+		    {% if config['PROFILE_LINK']: %}
+		    Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a>
+		    {% else: %}
+		    Réalisé par {{ config['AUTHOR'] }}
+		    {% endif %}
+		</div>
+		<ul id="social_links">
+		    {% for link in config['SOCIAL_LINKS'] %}
+		    <li><a href="{{ link['url'] }}"><span class="nf {{ link['class'] }}"></span></a></li>
+		    {% endfor %}
+		</ul>
+	    </footer>
+	</div>
     </body>
 </html>
