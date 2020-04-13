@@ -15,3 +15,5 @@ class Config:
     ]
     PROFILE_LINK = next(link['url'] for link in SOCIAL_LINKS
                         if link['name'] == 'Linkedin')
+
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'This-is-my-secret-key'
