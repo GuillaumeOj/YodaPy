@@ -12,15 +12,15 @@ a {
 
 #container{
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
     grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 150px 1fr 60px;
     width: 100vw;
     height: 100vh;
 }
 
 header{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-column: 1 / 4;
     grid-row-start: 1;
     background: black;
@@ -29,6 +29,7 @@ header{
 }
 
 #catchphrase {
+    grid-column: 2 / span 3;
     text-align: center;
 }
 
@@ -49,7 +50,7 @@ footer {
     border-top: 1px solid #343434;
     color: #999999;
     text-align: center;
-    font-size: 1em;
+    font-size: 0.7em;
 }
 
 footer a {
@@ -66,7 +67,7 @@ footer a:hover {
 
 #social_links {
     margin: 0;
-    padding: 10px;
+    padding: 2px;
 }
 
 #social_links li {
@@ -83,18 +84,19 @@ footer a:hover {
     grid-row: 2 / span 1;
     padding-top: 10px;
     padding-bottom: 10px;
-    overflow: scroll;
+    overflow-x: auto;
 }
 
 #feed{
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column;
     padding: 20px;
     grid-row: 1;
-    overflow: scroll;
+    overflow-x: auto;
     background: black;
     border: 1px solid #343434;
     border-radius: 15px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .post {
@@ -111,11 +113,13 @@ footer a:hover {
 .post.sent {
     align-self: flex-end;
     background: #454955;
+    border: 2px solid #666c7f;
 }
 
 .post.incoming {
     align-self: flex-start;
     background: #7cb342;
+    border: 2px solid #56990f;
 }
 
 #writing {
@@ -147,15 +151,18 @@ footer a:hover {
     border-radius: 5px;
     color: #f0f7ee;
     font-size: 1em;
+    -webkit-appearance: none;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 700px){
     #container {
-	grid-template-columns: 5px 100% 5px;
+	grid-template-columns: 5px 1fr 5px;
+	grid-template-rows: 150px 1fr 50px;
     }
 
-    header {
-	grid-template-columns: repeat(5, 1fr);
+    footer {
+	padding: 8px;
+	font-size: 0.5em;
     }
 
     #catchphrase {
@@ -168,5 +175,9 @@ footer a:hover {
 
     #feed {
 	padding: 10px;
+    }
+
+    #social_links {
+	padding: 2px;
     }
 }
