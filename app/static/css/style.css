@@ -1,3 +1,4 @@
+/* General properties */
 body{
     margin: 0;
     background: url('../img/stars.png') black;
@@ -10,6 +11,7 @@ a {
     color: #454955;
 }
 
+/* Main container for the app */
 #container{
     display: grid;
     grid-template-columns: 15% 70% 15%;
@@ -18,6 +20,7 @@ a {
     height: 100vh;
 }
 
+/* Header properties (logo + catchphrase) */
 header{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -43,6 +46,7 @@ header{
     font-size: 1em;
 }
 
+/* Properties for footer */
 footer {
     grid-column: 1 / 4;
     padding: 10px;
@@ -76,6 +80,7 @@ footer a:hover {
     font-size: 2em;
 }
 
+/* Content of the app */
 #content {
     display: grid;
     grid-template-rows: 1fr 50px;
@@ -87,17 +92,22 @@ footer a:hover {
     overflow-x: auto;
 }
 
-#feed{
+/* Discussion feed beetween the user and the bot */
+#feed, #http_error {
     margin: 0;
     padding: 0;
     grid-row: 1;
     overflow-x: auto;
-    background: black;
-    border: 1px solid #343434;
-    border-radius: 15px;
     -webkit-overflow-scrolling: touch;
 }
 
+#feed{
+    background: black;
+    border: 1px solid #343434;
+    border-radius: 15px;
+}
+
+/* Div hack for getting a 20px margin beetweens messages and fedd border */
 #feed > div {
     margin: 20px;
     display: flex;
@@ -111,6 +121,7 @@ footer a:hover {
     border-radius: 15px;
 }
 
+/* Erase the margin for the last post */
 #feed > div > :last-child {
     margin-bottom: 0;
 }
@@ -131,6 +142,7 @@ footer a:hover {
     border: 2px solid #56990f;
 }
 
+/* Form for sending messages to the bot */
 #writing {
     grid-row: 2;
 }
@@ -153,40 +165,67 @@ footer a:hover {
     resize: none;
 }
 #writing #submit {
+    -webkit-appearance: none;
     display: block;
+    margin: 0;
+    padding: 0;
     grid-column: 2;
     background: #52489c;
     border: 1px solid #2c1e99;
     border-radius: 5px;
     color: #f0f7ee;
-    font-size: 1em;
-    -webkit-appearance: none;
+    font-size: 0.8em;
 }
 
+#http_error {
+    display: flex;
+    flex-flow: column;
+    justify-content:center;
+    text-align: center;
+}
+
+#http_error > div {
+    font-size: 6em;
+}
+
+#http_error a {
+    font-size: 1.5em;
+    color: #f0f7ee;
+}
+
+#http_error a:hover {
+    text-decoration: underline;
+    color: #f0f7ee;
+}
+
+/* Media for smartphones */
 @media screen and (max-width: 700px){
-    #container {
-	grid-template-columns: 5px 1fr 5px;
-	grid-template-rows: 150px 1fr 50px;
-    }
+/* Adjust the grid for the container (reduce margin on left and right) */
+#container {
+    grid-template-columns: 5px 1fr 5px;
+    grid-template-rows: 150px 1fr 50px;
+}
 
-    footer {
-	padding: 8px;
-	font-size: 0.5em;
-    }
+/* Move the catchphrase in the header */
+#catchphrase {
+    grid-columns: 2 / span 3;
+}
 
-    #catchphrase {
-	grid-columns: 2 / span 3;
-    }
+#catchphrase h1{
+    font-size: 3em;
+}
 
-    #catchphrase h1{
-	font-size: 3em;
-    }
+/* Reduce the footer height for increase space for the feed */
+footer {
+    padding: 8px;
+    font-size: 0.5em;
+}
 
-    #feed {
-	padding: 10px;
-    }
+#feed > div {
+    padding: 10px;
+}
 
-    #social_links {
-	padding: 2px;
-    }
+#social_links {
+    padding: 2px;
+}
 }
