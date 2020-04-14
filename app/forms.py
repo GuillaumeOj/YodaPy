@@ -3,5 +3,5 @@ from wtforms import TextAreaField, SubmitField
 
 
 class MessageFieldsForm(FlaskForm):
-    message = TextAreaField('Your message')
-    submit = SubmitField('Send')
+    message = TextAreaField('Votre message')
+    submit = SubmitField('Envoyer')
