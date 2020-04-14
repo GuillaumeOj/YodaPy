@@ -3,9 +3,11 @@
 {% block content %}
         <div id="content">
             <div id="feed">
-            {% for message in messages: %}
-                {% include '_message.html' %}
-            {% endfor %}
+                <div>
+                    {% for message in messages: %}
+                        {% include '_message.html' %}
+                    {% endfor %}
+                </div>
             </div>
             <div id="writing">
             <form action="" method="post" novalidate>
