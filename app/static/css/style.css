@@ -88,7 +88,7 @@ footer a:hover {
 
 #feed{
     display: flex;
-    flex-flow: column;
+    flex-flow: column nowrap;
     padding: 20px;
     grid-row: 1;
     overflow: scroll;
@@ -100,8 +100,7 @@ footer a:hover {
 .post {
     margin-bottom: 20px;
     padding: 10px;
-    width: 45%;
-    max-width: 500px;
+    max-width: 45%;
     border-radius: 15px;
 }
 
@@ -110,14 +109,13 @@ footer a:hover {
 }
 
 .post.sent {
-    align-self: end;
+    align-self: flex-end;
     background: #454955;
-    text-align: right;
 }
 
 .post.incoming {
-    align-self: start;
-    background: #56e39f;
+    align-self: flex-start;
+    background: #7cb342;
 }
 
 #writing {
@@ -145,7 +143,8 @@ footer a:hover {
     display: block;
     grid-column: 2;
     background: #52489c;
-    border: none;
+    border: 1px solid #2c1e99;
+    border-radius: 5px;
     color: #f0f7ee;
     font-size: 1em;
 }
