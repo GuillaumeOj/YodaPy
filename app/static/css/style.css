@@ -228,4 +228,11 @@ footer {
 #social_links {
     padding: 2px;
 }
+
+#http_error > div {
+    font-size: 2em;
 }
+
+#http_error a {
+    font-size: 0.8em;
+}}
