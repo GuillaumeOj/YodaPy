@@ -100,7 +100,7 @@ footer a:hover {
 .post {
     margin-bottom: 20px;
     padding: 10px;
-    width: 40%;
+    width: 45%;
     max-width: 500px;
     border-radius: 15px;
 }
@@ -151,12 +151,8 @@ footer a:hover {
 }
 
 @media screen and (max-width: 600px){
-    body {
-	font-size: 2em;
-    }
-
     #container {
-	grid-template-columns: 2.5% 95% 2.5%;
+	grid-template-columns: 5px 100% 5px;
     }
 
     header {
@@ -165,5 +161,13 @@ footer a:hover {
 
     #catchphrase {
 	grid-columns: 2 / span 3;
+    }
+
+    #catchphrase h1{
+	font-size: 3em;
+    }
+
+    #feed {
+	padding: 10px;
     }
 }
