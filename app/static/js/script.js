@@ -8,15 +8,13 @@ function clearMessage() {
 }
 
 function processUserInput() {
-    if (writtingMessage.value) {
-        let userMessage = {'author': 'sent', 'content': writtingMessage.value};
-        let post = document.createElement('p');
-        post.classList.add('post', userMessage['author']);
-        post.textContent = userMessage['content'];
-        feedMessages.appendChild(post);
-        feed.scrollTop = feed.scrollHeight;
-        clearMessage();
-    }
+    let userMessage = {'author': 'sent', 'content': writtingMessage.value};
+    let post = document.createElement('p');
+    post.classList.add('post', userMessage['author']);
+    post.textContent = userMessage['content'];
+    feedMessages.appendChild(post);
+    feed.scrollTop = feed.scrollHeight;
+    clearMessage();
 }
 
 writtingMessage.addEventListener('keydown', function(event) {
@@ -25,7 +23,7 @@ writtingMessage.addEventListener('keydown', function(event) {
         event.preventDefault();
         writtingMessage.value += '\n';
         this.scrollTop = this.scrollHeight;
-    } else if (event.key == 'Enter') {
+    } else if (event.key == 'Enter' && writtingMessage.value) {
         event.preventDefault();
         processUserInput();
     }
@@ -33,7 +31,10 @@ writtingMessage.addEventListener('keydown', function(event) {
 
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
-    processUserInput();
+    if (writtingMessage.value) {
+        processUserInput();
+    }
 })
 
+/* Execute Clear message in case the user refresh the page with a message already written */
 clearMessage();
