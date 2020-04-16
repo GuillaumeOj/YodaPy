@@ -24,6 +24,7 @@ a {
 header{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    align-items: center;
     grid-column: 1 / 4;
     grid-row-start: 1;
     background: black;
@@ -31,6 +32,9 @@ header{
     border-bottom: 1px solid #343434;
 }
 
+#logo img {
+    width: 110px;
+}
 #catchphrase {
     grid-column: 2 / span 3;
     text-align: center;
@@ -115,15 +119,17 @@ footer a:hover {
 }
 
 .post {
-    margin-bottom: 20px;
+    margin: 0;
+    margin-bottom: 10px;
     padding: 10px;
     max-width: 45%;
     border-radius: 15px;
+    white-space: pre-line;
 }
 
 /* Erase the margin for the last post */
 #feed > div > :last-child {
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .post p{
@@ -156,6 +162,7 @@ footer a:hover {
     display: block;
     grid-column: 1;
     padding: 5px;
+    padding-left: 20px;
     background: black;
     border: 1px solid #343434;
     border-radius: 15px;
@@ -203,7 +210,11 @@ footer a:hover {
 /* Adjust the grid for the container (reduce margin on left and right) */
 #container {
     grid-template-columns: 5px 1fr 5px;
-    grid-template-rows: 150px 1fr 50px;
+    grid-template-rows: 100px 1fr 50px;
+}
+
+#logo img {
+    width: 80px;
 }
 
 /* Move the catchphrase in the header */
@@ -212,7 +223,11 @@ footer a:hover {
 }
 
 #catchphrase h1{
-    font-size: 3em;
+    font-size: 2em;
+}
+
+#catchphrase h2 {
+    font-size: 0.8em;
 }
 
 /* Reduce the footer height for increase space for the feed */
@@ -235,4 +250,5 @@ footer {
 
 #http_error a {
     font-size: 0.8em;
-}}
+}
+}
