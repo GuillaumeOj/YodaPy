@@ -8,3 +8,8 @@ def index():
     """Landing page"""
     form = MessageFieldsForm()
     return render_template('index.html', form=form)
+
+
+@app.route('/process', methods=['POST'])
+def process():
+    pass

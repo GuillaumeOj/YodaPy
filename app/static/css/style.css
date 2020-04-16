@@ -148,6 +148,19 @@ footer a:hover {
     border: 2px solid #56990f;
 }
 
+.post.hidden {
+    display: none;
+}
+
+#waiting {
+    padding: 0;
+    white-space: normal;
+    height: 30px;
+}
+
+#waiting img {
+    height: 30px;
+}
 /* Form for sending messages to the bot */
 #writing {
     grid-row: 2;
