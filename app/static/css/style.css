@@ -23,7 +23,7 @@ a {
 /* Header properties (logo + catchphrase) */
 header{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 10% auto 5%;
     align-items: center;
     grid-column: 1 / 4;
     grid-row-start: 1;
@@ -36,7 +36,7 @@ header{
     width: 110px;
 }
 #catchphrase {
-    grid-column: 2 / span 3;
+    grid-column: 2;
     text-align: center;
 }
 
@@ -226,13 +226,12 @@ footer a:hover {
     grid-template-rows: 100px 1fr 50px;
 }
 
-#logo img {
-    width: 80px;
+#header {
+    grid-template-columns: 85px auto 5px;
 }
 
-/* Move the catchphrase in the header */
-#catchphrase {
-    grid-columns: 2 / span 3;
+#logo img {
+    width: 80px;
 }
 
 #catchphrase h1{
