@@ -34,7 +34,11 @@ function processUserInput() {
     let postParser = new XMLHttpRequest();
     postParser.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            createPost('incoming', postParser.response)
+            if (this.response) {
+                createPost('incoming', postParser.response);
+            } else {
+                createPost('incoming', 'Je suis un boloss je trouve pas');
+            }
             waitingPost.classList.add('hidden');
         }
     }
