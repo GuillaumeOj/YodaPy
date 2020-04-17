@@ -14,7 +14,7 @@ class TestParser:
         parser.remove_accents()
         assert parser.question == expected_result
 
-    def test_split_text(self):
+    def test_split_sentences(self):
         parser = Parser('First sentence. And a question? Wonderfull!')
         expected_result = ['First sentence', 'And a question', 'Wonderfull']
         parser.split_sentences()
@@ -25,7 +25,7 @@ class TestParser:
             '''Salut Yoda, comment vas-tu ? Peux-tu me dire où trouver la tour Eiffel ?
             Passes un bonne journée !'''
         )
-        expected_result = 'Peux-tu me dire où trouver la tour Eiffel ?'
+        expected_result = 'Peux-tu me dire où trouver la tour Eiffel'
         parser.find_question()
         assert parser.question == expected_result
 
