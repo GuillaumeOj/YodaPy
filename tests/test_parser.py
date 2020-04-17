@@ -16,8 +16,8 @@ class TestParser:
 
     def test_split_text(self):
         parser = Parser('First sentence. And a question? Wonderfull!')
-        expected_result = ['First sentence.', 'And a question?', 'Wonderfull!']
-        parser.split_senteces()
+        expected_result = ['First sentence', 'And a question', 'Wonderfull']
+        parser.split_sentences()
         assert parser.question == expected_result
 
     def test_find_question(self):
