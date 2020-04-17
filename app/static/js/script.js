@@ -10,13 +10,8 @@ function clearMessage() {
 function createPost(author, content) {
     let post = document.createElement('p');
     post.classList.add('post', author);
-    if (author == 'sent') {
-        post.textContent = content;
-    } else {
-        post.appendChild(content);
-        console.log(content);
-        console.log(post);
-    }
+    post.textContent = content;
+
     feedMessages.appendChild(post);
     feed.scrollTop = feed.scrollHeight;
 }
@@ -37,7 +32,16 @@ function processUserInput() {
 
     // Send the message to '/process'
     let postParser = new XMLHttpRequest();
+    postParser.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            createPost('incoming', postParser.response)
+            waitingPost.classList.add('hidden');
+        }
+    }
+
+    // Url for access to process
     let parserUrl = new URL('process', document.URL);
+    // Data to send
     let postBody = new FormData();
     postBody.append('message', writtingMessage.value)
 
@@ -45,15 +49,7 @@ function processUserInput() {
     clearMessage();
 
     postParser.open('POST', parserUrl);
-    postParser.onreadystatechange = function () {
-        if (postParser.status == 200 && postParser.response) {
-            console.log(postParser.response);
-        }
-    }
     postParser.send(postBody);
-
-    // Hide waiting message
-    // waitingPost.classList.add('hidden');
 }
 
 writtingMessage.addEventListener('keydown', function(event) {

@@ -1,6 +1,7 @@
 from flask import render_template, request
 from app import app
 from app.forms import MessageFieldsForm
+from app.parser import Parser
 
 
 @app.route('/')
@@ -14,4 +15,5 @@ def index():
 def process():
     """Process page"""
     if 'message' in request.form:
-        return request.form['message']
+        parsed_message = Parser(request.form['message']).parse
+        return parsed_message

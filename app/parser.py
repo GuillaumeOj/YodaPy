@@ -5,6 +5,14 @@ class Parser:
     def __init__(self, question):
         self.question = question
 
+    @property
+    def parse(self):
+        self.lower_text()
+        self.remove_accents()
+        self.find_question()
+
+        return self.question
+
     def lower_text(self):
         self.question = self.question.lower()
 
