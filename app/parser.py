@@ -28,7 +28,10 @@ class Parser:
             if character in '?.!':
                 sentences.append(self.question[start:i].strip())
                 start = i + 1
-        self.question = sentences
+        if sentences:
+            self.question = sentences
+        else:
+            self.question = [self.question]
 
     def find_question(self):
         key_words = [
@@ -40,14 +43,27 @@ class Parser:
             'alle',
             'direction',
             'endroit',
+            'rue',
+            'boulevard',
+            'avenue',
+            'impasse',
+            'route',
+            'chemin',
+            'village',
+            'ville',
+            'port',
+            'jete',
+            'viaduc',
+            'pont',
         ]
-        user_question = ''
 
         self.split_sentences()
 
+        user_question = ''
+
         for key_word in key_words:
             for sentence in self.question:
-                if (key_word in sentence) & (sentence not in user_question):
+                if key_word in sentence:
                     user_question = sentence
 
         self.question = user_question
