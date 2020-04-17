@@ -28,9 +28,6 @@ function processUserInput() {
     // Create a post for the feed
     createPost(userMessage['author'], userMessage['content']);
 
-    // Clear the writing form
-    clearMessage();
-
     // Place waiting message to feed's bottom
     feedMessages.appendChild(document.getElementById('waiting'));
 
@@ -39,11 +36,24 @@ function processUserInput() {
     waitingPost.classList.remove('hidden');
 
     // Send the message to '/process'
-    let request = new XMLHttpRequest();
-    let processUrl = new URL('process', document.URL);
+    let postParser = new XMLHttpRequest();
+    let parserUrl = new URL('process', document.URL);
+    let postBody = new FormData();
+    postBody.append('message', writtingMessage.value)
 
-    request.open('POST', processUrl);
-    request.send(document.querySelector('#writing form'));
+    // Clear the writing form
+    clearMessage();
+
+    postParser.open('POST', parserUrl);
+    postParser.onreadystatechange = function () {
+        if (postParser.status == 200 && postParser.response) {
+            console.log(postParser.response);
+        }
+    }
+    postParser.send(postBody);
+
+    // Hide waiting message
+    // waitingPost.classList.add('hidden');
 }
 
 writtingMessage.addEventListener('keydown', function(event) {

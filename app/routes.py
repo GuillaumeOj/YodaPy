@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from app import app
 from app.forms import MessageFieldsForm
 
@@ -12,4 +12,6 @@ def index():
 
 @app.route('/process', methods=['POST'])
 def process():
-    pass
+    """Process page"""
+    if 'message' in request.form:
+        return request.form['message']
