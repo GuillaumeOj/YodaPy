@@ -25,11 +25,16 @@ class Parser:
         # Extend the stopwords' list with the keyword
         self.stopwords.extend(self.keywords)
 
+        self.parsed = False
+
     @property
     def parse(self):
-        self.lower_text()
-        self.remove_accents()
-        self.find_question()
+        if not self.parsed:
+            self.lower_text()
+            self.remove_accents()
+            self.find_question()
+            self.clear_question()
+            self.parsed = True
 
         return self.question
 
@@ -45,7 +50,7 @@ class Parser:
         sentences = []
         start = 0
         for i, character in enumerate(self.question):
-            if character in string.punctuation:
+            if character in '?.!-':
                 sentences.append(self.question[start:i].strip())
                 start = i + 1
         if sentences:
@@ -71,10 +76,10 @@ class Parser:
         self.find_question()
 
         # Clean the question
-        clean_question = self.question.split()
+        clean_question = []
 
-        for word in clean_question:
-            if word in self.stopwords:
-                clean_question.remove(word)
+        for word in self.question.split():
+            if word not in self.stopwords:
+                clean_question.append(word)
 
         self.question = ' '.join(clean_question)
