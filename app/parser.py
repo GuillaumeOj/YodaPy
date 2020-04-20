@@ -1,4 +1,8 @@
 import unicodedata
+import os.path
+import json
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Parser:
@@ -34,36 +38,19 @@ class Parser:
             self.question = [self.question]
 
     def find_question(self):
-        key_words = [
-            'ou est',
-            'trouve',
-            'adresse',
-            'lieu',
-            'situe',
-            'alle',
-            'direction',
-            'endroit',
-            'rue',
-            'boulevard',
-            'avenue',
-            'impasse',
-            'route',
-            'chemin',
-            'village',
-            'ville',
-            'port',
-            'jete',
-            'viaduc',
-            'pont',
-        ]
+        # Load keaywords for find the question from a json file
+        keywords_path = os.path.join(current_dir, 'static/json/question_keywords.json')
+        keywords = []
+        with open(keywords_path) as json_f:
+            keywords = json.load(json_f)
 
         self.split_sentences()
 
         user_question = ''
 
-        for key_word in key_words:
+        for keyword in keywords:
             for sentence in self.question:
-                if key_word in sentence:
+                if keyword in sentence:
                     user_question = sentence
 
         self.question = user_question
