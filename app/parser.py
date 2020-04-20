@@ -1,6 +1,7 @@
 import unicodedata
 import os.path
 import json
+import string
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -8,6 +9,21 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 class Parser:
     def __init__(self, question):
         self.question = question
+
+        # Load stopwords from a json file
+        stopwords_path = os.path.join(current_dir, 'static/json/stopwords.json')
+        self.stopwords = []
+        with open(stopwords_path) as json_f:
+            self.stopwords = json.load(json_f)
+
+        # Load keywords for the question from a json file
+        keywords_path = os.path.join(current_dir, 'static/json/question_keywords.json')
+        self.keywords = []
+        with open(keywords_path) as json_f:
+            self.keywords = json.load(json_f)
+
+        # Extend the stopwords' list with the keyword
+        self.stopwords.extend(self.keywords)
 
     @property
     def parse(self):
@@ -29,7 +45,7 @@ class Parser:
         sentences = []
         start = 0
         for i, character in enumerate(self.question):
-            if character in '?.!':
+            if character in string.punctuation:
                 sentences.append(self.question[start:i].strip())
                 start = i + 1
         if sentences:
@@ -38,19 +54,27 @@ class Parser:
             self.question = [self.question]
 
     def find_question(self):
-        # Load keaywords for find the question from a json file
-        keywords_path = os.path.join(current_dir, 'static/json/question_keywords.json')
-        keywords = []
-        with open(keywords_path) as json_f:
-            keywords = json.load(json_f)
-
         self.split_sentences()
 
         user_question = ''
 
-        for keyword in keywords:
+        for keyword in self.keywords:
             for sentence in self.question:
                 if keyword in sentence:
                     user_question = sentence
 
         self.question = user_question
+
+    def clear_question(self):
+
+        # Find the question
+        self.find_question()
+
+        # Clean the question
+        clean_question = self.question.split()
+
+        for word in clean_question:
+            if word in self.stopwords:
+                clean_question.remove(word)
+
+        self.question = ' '.join(clean_question)

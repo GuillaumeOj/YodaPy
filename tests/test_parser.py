@@ -25,6 +25,15 @@ class TestParser:
             '''Salut Yoda, comment vas-tu ? Peux-tu me dire où trouver la tour Eiffel ?
             Passes un bonne journée !'''
         )
-        expected_result = 'Peux-tu me dire où trouver la tour Eiffel'
+        expected_result = 'tu me dire où trouver la tour Eiffel'
         parser.find_question()
+        assert parser.question == expected_result
+
+    def test_clear_question(self):
+        parser = Parser(
+            '''Salut Yoda, comment vas-tu ? Peux-tu me trouver la tour Eiffel ?
+            Passes un bonne journée !'''
+        )
+        expected_result = 'me trouver tour Eiffel'
+        parser.clear_question()
         assert parser.question == expected_result
