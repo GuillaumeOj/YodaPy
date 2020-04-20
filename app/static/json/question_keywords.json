@@ -4,19 +4,8 @@
     "adresse",
     "lieu",
     "situe",
-    "alle",
     "direction",
     "endroit",
-    "rue",
-    "boulevard",
-    "avenue",
-    "impasse",
-    "route",
-    "chemin",
     "village",
-    "ville",
-    "port",
-    "jete",
-    "viaduc",
-    "pont"
+    "ville"
 ]
