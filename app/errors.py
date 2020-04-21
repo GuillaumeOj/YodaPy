@@ -8,5 +8,5 @@ def not_found_error(error):
 
 
 @app.errorhandler(405)
-def not_found_error(error):
+def wrong_method_error(error):
     return render_template('errors/405.html')
