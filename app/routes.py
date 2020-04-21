@@ -15,5 +15,6 @@ def index():
 def process():
     """Process page"""
     if 'message' in request.form:
-        parsed_message = Parser(request.form['message']).parse
+        parser = Parser()
+        parsed_message = parser.parse(request.form['message'])
         return parsed_message

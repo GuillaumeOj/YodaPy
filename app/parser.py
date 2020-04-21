@@ -3,18 +3,26 @@ import os.path
 import json
 import string
 
+from app import app
+
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Parser:
-    def __init__(self, question):
-        self.question = question
+    def __init__(self):
+        self._user_input = ''
+        self._lower_input = ''
+        self._unaccented_input = ''
+        self._sentences = ''
+        self._question = ''
+        self._parsed_question = ''
 
         # Load stopwords from a json file
         stopwords_path = os.path.join(current_dir, 'static/json/stopwords.json')
         self.stopwords = []
         with open(stopwords_path) as json_f:
-            self.stopwords = json.load(json_f)
+            stopwords = json.load(json_f)
+            self.stopwords = [stopword for stopword in stopwords if len(stopword) > 1]
 
         # Load keywords for the question from a json file
         keywords_path = os.path.join(current_dir, 'static/json/question_keywords.json')
@@ -25,61 +33,67 @@ class Parser:
         # Extend the stopwords' list with the keyword
         self.stopwords.extend(self.keywords)
 
-        self.parsed = False
+    def parse(self, user_input):
+        self._user_input = user_input
 
-    @property
-    def parse(self):
-        if not self.parsed:
-            self.lower_text()
-            self.remove_accents()
-            self.find_question()
-            self.clear_question()
-            self.parsed = True
+        self.lower_text()
+        self.remove_accents()
+        self.split_sentences()
+        self.find_question()
+        self.clear_question()
 
-        return self.question
+        return self._parsed_question
 
     def lower_text(self):
-        self.question = self.question.lower()
+        self._lower_input = self._user_input.lower()
+
+        app.logger.info(f'Lower input => {self._lower_input}')
 
     def remove_accents(self):
-        unicode_text = unicodedata.normalize('NFD', self.question)
+        unicode_text = unicodedata.normalize('NFD', self._lower_input)
         ascii_unaccented = unicode_text.encode('ascii', 'ignore')
-        self.question = ascii_unaccented.decode('utf8')
+        self._unaccented_input = ascii_unaccented.decode('utf8')
+
+        app.logger.info(f'Unaccented input => {self._unaccented_input}')
 
     def split_sentences(self):
         sentences = []
         start = 0
-        for i, character in enumerate(self.question):
+        for i, character in enumerate(self._unaccented_input):
             if character in '?.!-':
-                sentences.append(self.question[start:i].strip())
+                sentences.append(self._unaccented_input[start:i].strip())
                 start = i + 1
         if sentences:
-            self.question = sentences
+            self._sentences = sentences
         else:
-            self.question = [self.question]
+            self._sentences = [self._unaccented_input]
+
+        app.logger.info(f'Sentences => {self._sentences}')
 
     def find_question(self):
-        self.split_sentences()
-
-        user_question = ''
+        question = []
 
         for keyword in self.keywords:
-            for sentence in self.question:
+            for sentence in self._sentences:
                 if keyword in sentence:
-                    user_question = sentence
+                    question.append(sentence)
 
-        self.question = user_question
+        # Keep only the last question
+        if question:
+            self._question = question[-1]
+        else:
+            self._question = ''
+
+        app.logger.info(f'Question => {self._question}')
 
     def clear_question(self):
+        parsed_question = self._question.split()
 
-        # Find the question
-        self.find_question()
+        # Remove stopwords
+        for word in self._question.split():
+            if word in self.stopwords and word in parsed_question:
+                parsed_question.remove(word)
 
-        # Clean the question
-        clean_question = []
+        self._parsed_question = ' '.join(parsed_question)
 
-        for word in self.question.split():
-            if word not in self.stopwords:
-                clean_question.append(word)
-
-        self.question = ' '.join(clean_question)
+        app.logger.info(f'Parsed question => {self._parsed_question}')
