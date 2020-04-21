@@ -38,5 +38,5 @@ class TestParser:
     def test_clear_question(self):
         TestParser.parser._question = 'tu me dire ou trouver la tour eiffel'
         TestParser.parser.clear_question()
-        expected_result = 'trouver tour eiffel'
+        expected_result = 'tour eiffel'
         assert TestParser.parser._parsed_question == expected_result

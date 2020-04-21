@@ -29,9 +29,6 @@ class Parser:
         with open(keywords_path) as json_f:
             self.keywords = json.load(json_f)
 
-        # Extend the stopwords' list with the keyword
-        self.stopwords.extend(self.keywords)
-
     def parse(self, user_input):
         self._user_input = user_input
 
@@ -92,16 +89,23 @@ class Parser:
         for punctuation in string.punctuation:
             if punctuation in splited_question:
                 splited_question = splited_question.replace(punctuation, ' ')
-        splited_question = splited_question.split()
 
         app.logger.info(f'Splitted question => {splited_question}')
+        splited_question = splited_question.split()
+
+        # Remove keywords
+        for keyword in self.keywords:
+            for word in splited_question:
+                if keyword in word:
+                    splited_question.remove(word)
+
+        app.logger.info(f'New Splitted => {splited_question}')
 
         parsed_question = []
 
         # Remove stopwords
         for word in splited_question:
             if word not in self.stopwords and len(word) > 1:
-                app.logger.info(f'Word removed => {word}')
                 parsed_question.append(word)
 
         self._parsed_question = ' '.join(parsed_question)
