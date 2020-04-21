@@ -21,8 +21,7 @@ class Parser:
         stopwords_path = os.path.join(current_dir, 'static/json/stopwords.json')
         self.stopwords = []
         with open(stopwords_path) as json_f:
-            stopwords = json.load(json_f)
-            self.stopwords = [stopword for stopword in stopwords if len(stopword) > 1]
+            self.stopwords = json.load(json_f)
 
         # Load keywords for the question from a json file
         keywords_path = os.path.join(current_dir, 'static/json/question_keywords.json')
@@ -87,12 +86,23 @@ class Parser:
         app.logger.info(f'Question => {self._question}')
 
     def clear_question(self):
-        parsed_question = self._question.split()
+        splited_question = self._question
+
+        # Replace last punctuations
+        for punctuation in string.punctuation:
+            if punctuation in splited_question:
+                splited_question = splited_question.replace(punctuation, ' ')
+        splited_question = splited_question.split()
+
+        app.logger.info(f'Splitted question => {splited_question}')
+
+        parsed_question = []
 
         # Remove stopwords
-        for word in self._question.split():
-            if word in self.stopwords and word in parsed_question:
-                parsed_question.remove(word)
+        for word in splited_question:
+            if word not in self.stopwords and len(word) > 1:
+                app.logger.info(f'Word removed => {word}')
+                parsed_question.append(word)
 
         self._parsed_question = ' '.join(parsed_question)
 
