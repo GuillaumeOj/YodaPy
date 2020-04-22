@@ -15,6 +15,7 @@ gunicorn = "*"
 doq = "*"
 black = "*"
 python-dotenv = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
