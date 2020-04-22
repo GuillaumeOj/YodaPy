@@ -11,11 +11,7 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 class Parser:
     def __init__(self):
         self._user_input = ""
-        self._lower_input = ""
-        self._unaccented_input = ""
-        self._sentences = ""
-        self._question = ""
-        self._parsed_question = ""
+        self._parsed_input = ""
 
         # Load stopwords from a json file
         stopwords_path = os.path.join(current_dir, "static/json/stopwords.json")
@@ -31,6 +27,7 @@ class Parser:
 
     def parse(self, user_input):
         self._user_input = user_input
+        self._parsed_input = self._user_input
 
         self.lower_text()
         self.remove_accents()
@@ -38,59 +35,49 @@ class Parser:
         self.find_question()
         self.clear_question()
 
-        return self._parsed_question
+        return self._parsed_input
 
     def lower_text(self):
-        self._lower_input = self._user_input.lower()
-
-        app.logger.info(f"Lower input => {self._lower_input}")
+        self._parsed_input = self._parsed_input.lower()
 
     def remove_accents(self):
-        unicode_text = unicodedata.normalize("NFD", self._lower_input)
+        unicode_text = unicodedata.normalize("NFD", self._parsed_input)
         ascii_unaccented = unicode_text.encode("ascii", "ignore")
-        self._unaccented_input = ascii_unaccented.decode("utf8")
-
-        app.logger.info(f"Unaccented input => {self._unaccented_input}")
+        self._parsed_input = ascii_unaccented.decode("utf8")
 
     def split_sentences(self):
         sentences = []
         start = 0
-        for i, character in enumerate(self._unaccented_input):
+        for i, character in enumerate(self._parsed_input):
             if character in "?.!-":
-                sentences.append(self._unaccented_input[start:i].strip())
+                sentences.append(self._parsed_input[start:i].strip())
                 start = i + 1
         if sentences:
-            self._sentences = sentences
+            self._parsed_input = sentences
         else:
-            self._sentences = [self._unaccented_input]
-
-        app.logger.info(f"Sentences => {self._sentences}")
+            self._parsed_input = [self._parsed_input]
 
     def find_question(self):
         question = []
-
         for keyword in self.keywords:
-            for sentence in self._sentences:
+            for sentence in self._parsed_input:
                 if keyword in sentence:
                     question.append(sentence)
 
         # Keep only the last question
         if question:
-            self._question = question[-1]
+            self._parsed_input = question[-1]
         else:
-            self._question = ""
-
-        app.logger.info(f"Question => {self._question}")
+            self._parsed_input = ""
 
     def clear_question(self):
-        splited_question = self._question
+        splited_question = self._parsed_input
 
         # Replace last punctuations
         for punctuation in string.punctuation:
             if punctuation in splited_question:
                 splited_question = splited_question.replace(punctuation, " ")
 
-        app.logger.info(f"Splitted question => {splited_question}")
         splited_question = splited_question.split()
 
         # Remove keywords
@@ -99,15 +86,10 @@ class Parser:
                 if keyword in word:
                     splited_question.remove(word)
 
-        app.logger.info(f"New Splitted => {splited_question}")
-
         parsed_question = []
-
         # Remove stopwords
         for word in splited_question:
             if word not in self.stopwords and len(word) > 1:
                 parsed_question.append(word)
 
-        self._parsed_question = " ".join(parsed_question)
-
-        app.logger.info(f"Parsed question => {self._parsed_question}")
+        self._parsed_input = " ".join(parsed_question)
