@@ -14,6 +14,7 @@ flask-wtf = "*"
 gunicorn = "*"
 doq = "*"
 black = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
