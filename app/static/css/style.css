@@ -15,7 +15,7 @@ a {
 #container{
     display: grid;
     grid-template-columns: 15% 70% 15%;
-    grid-template-rows: 150px 1fr 60px;
+    grid-template-rows: 100px 1fr 60px;
     width: 100vw;
     height: 100vh;
 }
@@ -23,7 +23,7 @@ a {
 /* Header properties (logo + catchphrase) */
 header{
     display: grid;
-    grid-template-columns: 10% auto 5%;
+    grid-template-columns: 85px auto 5%;
     align-items: center;
     grid-column: 1 / 4;
     grid-row-start: 1;
@@ -33,20 +33,21 @@ header{
 }
 
 #logo img {
-    width: 110px;
+    width: 80px;
 }
+
 #catchphrase {
     grid-column: 2;
     text-align: center;
 }
 
 #catchphrase h1 {
-    margin: 10px;
-    font-size: 4em;
+    margin: 0px;
+    font-size: 2em;
 }
 
 #catchphrase h2 {
-    margin: 10px;
+    margin: 0px;
     font-size: 1em;
 }
 
@@ -58,7 +59,7 @@ footer {
     border-top: 1px solid #343434;
     color: #999999;
     text-align: center;
-    font-size: 0.7em;
+    font-size: 12px;
 }
 
 footer a {
@@ -125,6 +126,7 @@ footer a:hover {
     max-width: 45%;
     border-radius: 15px;
     white-space: pre-line;
+    font-size: 14px;
 }
 
 /* Erase the margin for the last post */
@@ -176,6 +178,7 @@ footer a:hover {
     grid-template-columns: 1fr 80px;
     grid-gap: 10px;
 }
+
 #writing #message {
     display: block;
     grid-column: 1;
@@ -186,9 +189,10 @@ footer a:hover {
     border-radius: 15px;
     color: #f0f7ee;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: 14px;
     resize: none;
 }
+
 #writing #submit {
     -webkit-appearance: none;
     display: block;
@@ -199,7 +203,7 @@ footer a:hover {
     border: 1px solid #2c1e99;
     border-radius: 5px;
     color: #f0f7ee;
-    font-size: 0.8em;
+    font-size: 14px;
 }
 
 #http_error {
@@ -227,34 +231,32 @@ footer a:hover {
 @media screen and (max-width: 700px){
 /* Adjust the grid for the container (reduce margin on left and right) */
 #container {
-    grid-template-columns: 5px 1fr 5px;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-columns: 8px 1fr 8px;
+    grid-template-rows: 85px 1fr 60px;
 }
 
-#header {
-    grid-template-columns: 85px auto 5px;
+header {
+    grid-template-columns: 75px auto 5px;
 }
 
 #logo img {
-    width: 80px;
+    width: 70px;
 }
-
 #catchphrase h1{
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #catchphrase h2 {
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 /* Reduce the footer height for increase space for the feed */
 footer {
     padding: 8px;
-    font-size: 0.5em;
 }
 
 #feed > div {
-    padding: 10px;
+    margin: 10px;
 }
 
 #social_links {
