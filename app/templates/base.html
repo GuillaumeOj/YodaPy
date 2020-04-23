@@ -7,7 +7,13 @@
     {% else: %}
     <title>{{ config['BOT_NAME'] }}</title>
     {% endif %}
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <!-- Settings for mapbox -->
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- End of settings for mapbox -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mini-nerd-fonts.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>

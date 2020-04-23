@@ -2,6 +2,7 @@ let feed= document.getElementById('feed');
 let feedMessages = document.querySelector('#feed > div');
 let writtingMessage = document.getElementById('message');
 let submitButton = document.getElementById('submit');
+let mapNumber = 0
 
 function clearMessage() {
     writtingMessage.value = '';
@@ -14,6 +15,31 @@ function createPost(author, content) {
 
     feedMessages.appendChild(post);
     feed.scrollTop = feed.scrollHeight;
+}
+
+function createMap(content) {
+    // Increment mapNUmber ofr unique ID
+    mapNumber++;
+    // Create a div for the map
+    let mapDiv = document.createElement('div');
+    mapDiv.id = 'map-' + mapNumber;
+    mapDiv.classList.add('post', 'incoming', 'map');
+
+    // Send the div in the fedd
+    feedMessages.appendChild(mapDiv);
+    feed.scrollTop = feed.scrollHeight;
+
+    // Create the map
+    let map = new mapboxgl.Map({
+        container: mapDiv.id, // Container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // Map style to use
+        center: content['center'],// Starting position [lng, lat]
+        zoom: 14, // Starting zoom level
+    });
+    // Add a marker to the map
+    let marker = new mapboxgl.Marker() // initialize a new marker
+      .setLngLat(content['center']) // Marker [lng, lat] coordinates
+      .addTo(map); // Add the marker to the map
 }
 
 function processUserInput() {
@@ -35,10 +61,12 @@ function processUserInput() {
         method: "POST",
         body: new FormData(form)
     })
-        .then(response => response.text()) // Catch the response as text (temporary)
+        .then(response => response.json()) // Catch the response as text (temporary)
         .then(result => {                  // Use the result for creating posts
-            if(result) {
-                createPost('incoming', result);
+            if(result["status_code"] < 400) {
+                let content = result["content"]
+                createPost('incoming', content["place_name"]);
+                createMap(content)
             } else {
                 createPost('incoming', 'Je suis un boloss je trouve pas');
             }
