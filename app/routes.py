@@ -30,7 +30,7 @@ def process():
         if status_code < 400:
             # Send the parsed input to the geo code api
             geo_code = GeoCode()
-            geo_response = geo_code.api_request(parsed_message)
+            geo_response = geo_code.api_request(parsed_message["content"])
 
             content = geo_response["content"]
             status_code = geo_response["status_code"]
