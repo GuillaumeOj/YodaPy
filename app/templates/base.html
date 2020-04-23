@@ -29,13 +29,13 @@
         </header>
         {% block content %}{% endblock %}
         <footer>
-            <div id="author">
+            <p id="author">
                 {% if config['PROFILE_LINK']: %}
                 Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a>
                 {% else: %}
                 Réalisé par {{ config['AUTHOR'] }}
                 {% endif %}
-            </div>
+            </p>
             <ul id="social_links">
                 {% for link in config['SOCIAL_LINKS'] %}
                 <li><a href="{{ link['url'] }}"><span class="nf {{ link['class'] }}"></span></a></li>
