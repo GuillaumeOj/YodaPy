@@ -15,8 +15,7 @@ a {
 #container{
     display: grid;
     grid-template-columns: 15% 70% 15%;
-    grid-template-rows: 100px 1fr 60px;
-    width: 100vw;
+    grid-template-rows: 100px auto 60px;
     height: 100vh;
 }
 
@@ -96,6 +95,8 @@ footer a:hover {
 
 /* Content of the app */
 #content {
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-rows: 1fr 50px;
     grid-gap: 10px;
@@ -107,7 +108,6 @@ footer a:hover {
 /* Discussion feed beetween the user and the bot */
 #feed, #http_error {
     margin: 0;
-    margin-top: 10px;
     grid-row: 1;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -130,7 +130,7 @@ footer a:hover {
     margin: 0;
     margin-bottom: 10px;
     padding: 10px;
-    max-width: 45%;
+    max-width: 70%;
     border-radius: 15px;
     white-space: pre-line;
     font-size: 14px;
@@ -182,7 +182,7 @@ footer a:hover {
 #writing form {
     display: grid;
     grid-template-columns: 1fr 80px;
-    grid-gap: 10px;
+    column-gap: 10px;
 }
 
 #writing #message {
@@ -257,9 +257,6 @@ header {
 
 #feed > div {
     margin: 10px;
-}
-
-#social_links {
 }
 
 #http_error > div {
