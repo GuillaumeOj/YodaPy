@@ -35,7 +35,12 @@ class Parser:
         self.find_question()
         self.clear_question()
 
-        return self._parsed_input
+        if self._parsed_input:
+            status_code = 200
+        else:
+            status_code = 404
+
+        return {"content": self._parsed_input, "status_code": status_code}
 
     def lower_text(self):
         self._parsed_input = self._parsed_input.lower()

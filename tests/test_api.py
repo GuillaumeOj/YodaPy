@@ -28,6 +28,7 @@ class TestGeoCode:
             def __init__(self, url, params=None):
                 pass
                 self.ok = True
+                self.status_code = 200
 
             def json(self):
                 return {
@@ -43,4 +44,4 @@ class TestGeoCode:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert GeoCode().api_request("query_text") == locations
+        assert GeoCode().api_request("query_text")["content"] == locations

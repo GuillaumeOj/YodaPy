@@ -1,20 +1,41 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from app import app
 from app.forms import MessageFieldsForm
 from app.parser import Parser
+from app.geo_code import GeoCode
 
 
-@app.route('/')
+@app.route("/")
 def index():
     """Landing page"""
     form = MessageFieldsForm()
-    return render_template('index.html', form=form)
+    return render_template("index.html", form=form)
 
 
-@app.route('/process', methods=['POST'])
+@app.route("/process", methods=["POST"])
 def process():
     """Process page"""
-    if 'message' in request.form:
+
+    content = ""
+    status_code = 404
+
+    if "message" in request.form:
+        # Parse the user input
         parser = Parser()
-        parsed_message = parser.parse(request.form['message'])
-        return parsed_message
+        parsed_message = parser.parse(request.form["message"])
+
+        content = parsed_message["content"]
+        status_code = parsed_message["status_code"]
+
+        if parsed_message["status_code"] < 400:
+            # Send the parsed input to the geo code api
+            geo_code = GeoCode()
+            geo_response = geo_code.api_request(parsed_message)
+
+            content = geo_response["content"]
+            status_code = geo_response["status_code"]
+
+            if geo_response["status_code"] < 400:
+                pass
+
+    return jsonify(content="", status_code=parsed_message["status_code"])

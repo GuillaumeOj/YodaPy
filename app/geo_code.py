@@ -18,23 +18,21 @@ class GeoCode:
         response = requests.get(url, params=parameters)
 
         features = []
+        content = []
 
         # Return a list of features if response is ok
         if response.ok:
             features = response.json()["features"]
 
-            return (
-                [
-                    {
-                        "relevance": feature["relevance"],
-                        "text": feature["text"],
-                        "place_name": feature["place_name"],
-                        "center": feature["center"],
-                    }
-                    for feature in features
-                ],
-                response.status_code,
-            )
+            content = [
+                {
+                    "relevance": feature["relevance"],
+                    "text": feature["text"],
+                    "place_name": feature["place_name"],
+                    "center": feature["center"],
+                }
+                for feature in features
+            ]
 
         # Return the http status code else
-        return ([], response.status_code)
+        return {"content": content, "status_code": response.status_code}
