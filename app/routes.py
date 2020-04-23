@@ -27,7 +27,7 @@ def process():
         content = parsed_message["content"]
         status_code = parsed_message["status_code"]
 
-        if parsed_message["status_code"] < 400:
+        if status_code < 400:
             # Send the parsed input to the geo code api
             geo_code = GeoCode()
             geo_response = geo_code.api_request(parsed_message)
@@ -35,7 +35,7 @@ def process():
             content = geo_response["content"]
             status_code = geo_response["status_code"]
 
-            if geo_response["status_code"] < 400:
+            if status_code < 400:
                 pass
 
-    return jsonify(content="", status_code=parsed_message["status_code"])
+    return jsonify(content=content, status_code=status_code)
