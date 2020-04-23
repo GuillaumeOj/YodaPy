@@ -28,7 +28,6 @@ header{
     grid-column: 1 / 4;
     grid-row-start: 1;
     background: black;
-    padding: 10px;
     border-bottom: 1px solid #343434;
 }
 
@@ -53,8 +52,9 @@ header{
 
 /* Properties for footer */
 footer {
+    display: grid;
+    align-items: center;
     grid-column: 1 / 4;
-    padding: 10px;
     background: black;
     border-top: 1px solid #343434;
     color: #999999;
@@ -70,37 +70,44 @@ footer a:hover {
     color: #CCCCCC;
 }
 
+#author {
+    margin: 0;
+    padding: 0;
+}
+
 #author a:hover {
     text-decoration: underline;
 }
 
 #social_links {
     margin: 0;
-    padding: 2px;
+    padding: 0;
 }
 
 #social_links li {
     display: inline;
-    padding: 10px;
     font-size: 2em;
+    margin-right: 10px;
+}
+
+#social_links li:last-of-type {
+    margin: 0;
 }
 
 /* Content of the app */
 #content {
     display: grid;
     grid-template-rows: 1fr 50px;
-    grid-gap: 20px;
+    grid-gap: 10px;
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
-    padding-top: 10px;
-    padding-bottom: 10px;
     overflow-x: auto;
 }
 
 /* Discussion feed beetween the user and the bot */
 #feed, #http_error {
     margin: 0;
-    padding: 0;
+    margin-top: 10px;
     grid-row: 1;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -160,7 +167,6 @@ footer a:hover {
 }
 
 #waiting {
-    padding: 0;
     white-space: normal;
     height: 30px;
 }
@@ -180,10 +186,10 @@ footer a:hover {
 }
 
 #writing #message {
+    padding: 5px;
+    padding-left: 15px;
     display: block;
     grid-column: 1;
-    padding: 5px;
-    padding-left: 20px;
     background: black;
     border: 1px solid #343434;
     border-radius: 15px;
@@ -197,7 +203,6 @@ footer a:hover {
     -webkit-appearance: none;
     display: block;
     margin: 0;
-    padding: 0;
     grid-column: 2;
     background: #52489c;
     border: 1px solid #2c1e99;
@@ -231,7 +236,7 @@ footer a:hover {
 @media screen and (max-width: 700px){
 /* Adjust the grid for the container (reduce margin on left and right) */
 #container {
-    grid-template-columns: 8px 1fr 8px;
+    grid-template-columns: 10px 1fr 10px;
     grid-template-rows: 85px 1fr 60px;
 }
 
@@ -250,17 +255,11 @@ header {
     font-size: 1em;
 }
 
-/* Reduce the footer height for increase space for the feed */
-footer {
-    padding: 8px;
-}
-
 #feed > div {
     margin: 10px;
 }
 
 #social_links {
-    padding: 2px;
 }
 
 #http_error > div {
