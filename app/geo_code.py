@@ -24,7 +24,7 @@ class GeoCode:
         if response.ok:
             features = response.json()["features"]
 
-            content = [
+            locations = [
                 {
                     "relevance": feature["relevance"],
                     "text": feature["text"],
@@ -33,6 +33,8 @@ class GeoCode:
                 }
                 for feature in features
             ]
+
+            content = max(locations, key=lambda location: location["relevance"])
 
         # Return the http status code else
         return {"content": content, "status_code": response.status_code}
