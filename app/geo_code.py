@@ -6,11 +6,9 @@ class GeoCode:
     def __init__(self):
         self.geo_token = app.config["GEO_TOKEN"]
         self.geo_url = app.config["GEO_URL"]
-        self.query_text = ""
 
     def api_request(self, query_text):
-        self.query_text = query_text
-        url = f"{self.geo_url}/{self.query_text}.json"
+        url = f"{self.geo_url}/{query_text}.json"
         parameters = {
             "access_token": self.geo_token,
         }
