@@ -36,3 +36,7 @@ class Config:
     # This project use Mapbox https://www.mapbox.com/
     GEO_TOKEN = os.environ.get("GEO_TOKEN") or "This-is-a-foo-tooken"
     GEO_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
+
+    # Url for the french wikipedia's API
+    WIKI_API_URL = "https://fr.wikipedia.org/w/api.php"
+    WIKI_URL = "https://fr.wikipedia.org/wiki/"

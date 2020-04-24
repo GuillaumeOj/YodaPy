@@ -70,8 +70,9 @@ function processUserInput() {
         .then(result => {                  // Use the result for creating posts
             if(result["status_code"] < 400) {
                 let content = result["content"]
-                createPost('incoming', content["place_name"]);
-                createMap(content)
+                createPost('incoming', content["map"]["place_name"]);
+                createMap(content["map"]);
+                createPost('incoming', content["article"]["extract"]);
             } else {
                 createPost('incoming', 'Je suis un boloss je trouve pas');
             }
