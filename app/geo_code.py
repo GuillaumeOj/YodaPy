@@ -1,4 +1,7 @@
 import requests
+import json
+
+from flask import Response
 from app import app
 
 
@@ -16,7 +19,7 @@ class GeoCode:
         response = requests.get(url, params=parameters)
 
         features = []
-        content = []
+        content = {}
 
         # Return a list of features if response is ok
         if response.ok:
@@ -34,5 +37,7 @@ class GeoCode:
 
             content = max(locations, key=lambda location: location["relevance"])
 
-        # Return the http status code else
-        return {"content": content, "status_code": response.status_code}
+        content = json.dumps(content, indent=4)
+        return Response(
+            response=content, mimetype="application/json", status=response.status_code
+        )

@@ -3,6 +3,7 @@ import os.path
 import json
 import string
 
+from flask import Response
 from app import app
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
@@ -36,11 +37,17 @@ class Parser:
         self.clear_question()
 
         if self._parsed_input:
+            self._parsed_input = json.dumps(
+                {"parsed_input": self._parsed_input}, indent=4
+            )
             status_code = 200
         else:
             status_code = 404
 
-        return {"content": self._parsed_input, "status_code": status_code}
+        # return {"content": self._parsed_input, "status_code": status_code}
+        return Response(
+            response=self._parsed_input, mimetype="application/json", status=status_code,
+        )
 
     def lower_text(self):
         self._parsed_input = self._parsed_input.lower()

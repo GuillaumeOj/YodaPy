@@ -59,6 +59,7 @@ function processUserInput() {
 
     // Write a waiting message
     feedMessages.appendChild(document.getElementById('waiting'));
+    feed.scrollTop = feed.scrollHeight;
 
     // Remove the class 'hidden' for the waiting message
     let waitingPost = document.getElementById('waiting');
@@ -69,17 +70,21 @@ function processUserInput() {
         method: "POST",
         body: new FormData(form)
     })
-        .then(response => response.json()) // Catch the response as text (temporary)
-        .then(result => {                  // Use the result for creating posts
-            if(result["status_code"] < 400) {
-                let content = result["content"]
-                createPost('incoming', content["map"]["place_name"]);
-                createMap(content["map"]);
-                createPost('incoming', content["article"]["extract"]);
-            } else {
+        .then(response => response.json())
+        .then(result =>  {
+            if (Object.keys(result).length === 0) {
                 createPost('incoming', 'Je suis un boloss je trouve pas');
+            } else {
+                if ("map" in result) {
+                    createPost('incoming', result["map"]["place_name"]);
+                    createMap(result["map"]);
+                }
+                if ("article" in result) {
+                    createPost('incoming', result["article"]["extract"]);
+                }
             }
             waitingPost.classList.add('hidden');
+            feed.scrollTop = feed.scrollHeight;
         })
         .catch(error => console.log(error));
 
