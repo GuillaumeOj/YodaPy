@@ -7,15 +7,13 @@ class WikiSearch:
     def __init__(self):
         self.wiki_api_url = app.config["WIKI_API_URL"]
         self.wiki_url = app.config["WIKI_URL"]
-        self.query_coordinates = []
 
     def geodata_request(self, query_coordinates):
-        self.query_coordinates = query_coordinates
         parameters = {
             "action": "query",
             "format": "json",
             "list": "geosearch",
-            "gscoord": f"{self.query_coordinates[0]}|{self.query_coordinates[1]}",
+            "gscoord": f"{query_coordinates[0]}|{query_coordinates[1]}",
         }
 
         response = requests.get(self.wiki_api_url, params=parameters)
