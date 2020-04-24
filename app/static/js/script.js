@@ -20,6 +20,7 @@ function createPost(author, content) {
 function createMap(content) {
     // Increment mapNUmber ofr unique ID
     mapNumber++;
+
     // Create a div for the map
     let mapDiv = document.createElement('div');
     mapDiv.id = 'map-' + mapNumber;
@@ -36,11 +37,13 @@ function createMap(content) {
         center: content['center'],// Starting position [lng, lat]
         zoom: 14, // Starting zoom level
     });
+
     // Change map language for french
     let language = new MapboxLanguage({
         defaultLanguage: 'fr'
     });
     map.addControl(language);
+
     // Add a marker to the map
     new mapboxgl.Marker() // initialize a new marker
       .setLngLat(content['center']) // Marker [lng, lat] coordinates
