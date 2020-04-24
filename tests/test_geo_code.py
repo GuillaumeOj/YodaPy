@@ -44,4 +44,4 @@ class TestGeoCode:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert GeoCode().api_request("query_text")["content"] == locations
+        assert GeoCode().api_request("query_text")["content"] == locations[0]
