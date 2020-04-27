@@ -1,5 +1,5 @@
 /* General properties */
-body{
+body {
     margin: 0;
     background: url('../img/stars.png') black;
     color: #f0f7ee;
@@ -12,7 +12,7 @@ a {
 }
 
 /* Main container for the app */
-#container{
+#container {
     display: grid;
     grid-template-columns: 15% 70% 15%;
     grid-template-rows: 100px auto 60px;
@@ -20,7 +20,7 @@ a {
 }
 
 /* Header properties (logo + catchphrase) */
-header{
+header {
     display: grid;
     grid-template-columns: 85px auto 5%;
     align-items: center;
@@ -113,7 +113,7 @@ footer a:hover {
     -webkit-overflow-scrolling: touch;
 }
 
-#feed{
+#feed {
     background: black;
     border: 1px solid #343434;
     border-radius: 15px;
@@ -141,8 +141,14 @@ footer a:hover {
     margin: 0;
 }
 
-.post p{
+.post p {
     margin: 0;
+}
+
+.post a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #f0f7ee;
 }
 
 .post.sent {
@@ -233,7 +239,8 @@ footer a:hover {
 }
 
 /* Media for smartphones */
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
+
 /* Adjust the grid for the container (reduce margin on left and right) */
 #container {
     grid-template-columns: 10px 1fr 10px;
