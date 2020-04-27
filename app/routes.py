@@ -28,13 +28,13 @@ def process():
         parser = Parser()
         parser_response = parser.parse(request.form["message"])
 
-        if parser_response.status == "200 OK":
+        if parser_response.status_code == 200:
             # Send the parsed input to the geo code api
             geo_code = GeoCode()
-            geo_response = geo_code.api_request(json.loads(parser_response.response[0]))
+            geo_response = geo_code.api_request(parser_response.get_json())
 
-            if geo_response.status == "200 OK":
-                content["map"] = json.loads(geo_response.response[0])
+            if geo_response.status_code == 200:
+                content["map"] = geo_response.get_json()
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
@@ -46,16 +46,16 @@ def process():
 
                 wiki_article_info = wiki_search.geodata_request(wiki_coordinates)
 
-                if wiki_article_info.status == "200 OK":
-                    content["article_info"] = json.loads(wiki_article_info.response[0])
+                if wiki_article_info.status_code == 200:
+                    content["article_info"] = wiki_article_info.get_json()
 
                     # Get the content of the article
                     wiki_article = wiki_search.text_request(
                         content["article_info"]["pageid"]
                     )
 
-                    if wiki_article.status == "200 OK":
-                        content["article"] = json.loads(wiki_article.response[0])
+                    if wiki_article.status_code == 200:
+                        content["article"] = wiki_article.get_json()
 
     if content:
         status_code = 200
