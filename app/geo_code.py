@@ -35,9 +35,11 @@ class GeoCode:
                 for feature in features
             ]
 
-            content = max(locations, key=lambda location: location["relevance"])
+            if locations:
+                status_code = response.status_code
+                content = max(locations, key=lambda location: location["relevance"])
+            else:
+                status_code = 404
 
         content = json.dumps(content, indent=4)
-        return Response(
-            response=content, mimetype="application/json", status=response.status_code
-        )
+        return Response(response=content, mimetype="application/json", status=status_code)
