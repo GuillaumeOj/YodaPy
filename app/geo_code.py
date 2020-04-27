@@ -1,5 +1,6 @@
 import requests
 import json
+from urllib.parse import quote
 
 from flask import Response
 from app import app
@@ -11,7 +12,8 @@ class GeoCode:
         self.geo_url = app.config["GEO_URL"]
 
     def api_request(self, query_text):
-        url = f"{self.geo_url}/{query_text}.json"
+        quoted_query = quote(query_text["parsed_input"])
+        url = f"{self.geo_url}/{quoted_query}.json"
         parameters = {
             "access_token": self.geo_token,
         }
