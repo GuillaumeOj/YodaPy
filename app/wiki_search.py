@@ -73,7 +73,7 @@ class WikiSearch:
             }
 
             # Build an url for the front
-            article_url = urljoin(self.wiki_url, content["title"])
+            article_url = urljoin(self.wiki_url, content["title"], allow_fragments=False)
             content["url"] = article_url
 
         # Return the http status code else
