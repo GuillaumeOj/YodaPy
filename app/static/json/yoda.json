@@ -1,0 +1,28 @@
+{
+    "wait": [
+        "Patient·e tu dois être jeune padawan. Réfléchir je suis en train.",
+        "Chercher la connaissance je suis en train.",
+        "Plusieurs chemins mênent à la connaissance. Le meilleur pour toi je vais trouver jeune padawan.",
+        "Un instant je te demande jeune padawan."
+    ],
+    "answer": [
+        "Ce que tu as appris, toujours tu transmettras.",
+        "Puissant·e tu es devenu·e, la connaissance en toi je ressens.",
+        "Oublier ce que tu as appris tu dois, la véritable connaissance ici je te donnes.",
+        "Vers la connaissance tu te diriges. Cette information je te délivres."
+    ],
+    "hello": [
+        "Je te salue jeune padawan. Sur le chemin de le connaissance t'accompagner je vais.",
+        "Bonjour jeune padawan. Soif de connaissance en toi je ressens.",
+        "Le·a bienvenue jeune padawan tu es."
+    ],
+    "not_found": [
+        "Ce lieu dans la galaxie je ne trouve pas. Plus d'information me donner tu peux.",
+        "Ce lieu dans les archives je ne trouve pas. Plus précis tu dois être."
+    ],
+    "parse_error": [
+        "Ta question je ne comprends pas. La connaissance je ne peux t'apprendre.",
+        "Le côté obscur de la Force en toi je ressens. Te concentrer tu dois pour un lieu me demander.",
+        "Missa maladroit ! Carrabouilli limousine bigboss ! Hum... Ta question je ne comprends pas."
+    ]
+}
