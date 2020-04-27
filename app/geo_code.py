@@ -8,25 +8,30 @@ from app import app
 
 class GeoCode:
     """GeoCode.
-    Send a query to a geocoding api for getting the coordinates of a place"""
+    Send a query to a geocoding api for getting informations about a place."""
 
     def __init__(self):
         self.geo_token = app.config["GEO_TOKEN"]
         self.geo_url = app.config["GEO_URL"]
 
-    def api_request(self, query_text):
-        """api_request.
+    def api_request(self, query_text: dict) -> object:
+        """Get informations about a place with a query from a user.
 
-        :param query_text:
+        Parameters
+        ----------
+        query_text : dict
+            query_text
+
+        Returns
+        -------
+        object
+
         """
-
         # Quote the query to avoid any issue
         quoted_query = quote(query_text["parsed_input"])
         url = f"{self.geo_url}/{quoted_query}.json"
 
-        parameters = {
-            "access_token": self.geo_token,
-        }
+        parameters = {"access_token": self.geo_token}
 
         response = requests.get(url, params=parameters)
 
