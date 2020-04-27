@@ -61,7 +61,7 @@ class Parser:
         sentences = []
         start = 0
         for i, character in enumerate(self._parsed_input):
-            if character in "?.!":
+            if character in "?.!,":
                 sentences.append(self._parsed_input[start:i].strip())
                 start = i + 1
         if sentences:
@@ -83,13 +83,19 @@ class Parser:
             self._parsed_input = ""
 
     def clear_question(self):
-        splited_question = self._parsed_input.split()
+        # Remove quotes
+        removed_quotes = self._parsed_input.replace("'", " ")
+        removed_hyphens = removed_quotes.replace("-", " ")
+        splited_question = removed_hyphens.split()
 
-        parsed_question = []
+        # Remove keywords
+        parsed_question = [word for word in splited_question if word not in self.keywords]
+
         # Remove stopwords
-        for word in splited_question:
-            app.logger.info(word)
-            if word not in self.stopwords and len(word) > 1:
-                parsed_question.append(word)
+        parsed_question = [
+            word
+            for word in parsed_question
+            if word not in self.stopwords and len(word) > 1
+        ]
 
         self._parsed_input = " ".join(parsed_question)
