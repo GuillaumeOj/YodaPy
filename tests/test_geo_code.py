@@ -1,8 +1,10 @@
+import json
 from app.geo_code import GeoCode
 
 
 class TestGeoCode:
     def test_api_request(self, monkeypatch):
+        query_text = {"parsed_input": "query text"}
         locations = [
             {
                 "relevance": 1,
@@ -44,4 +46,4 @@ class TestGeoCode:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert GeoCode().api_request("query_text")["content"] == locations[0]
+        assert json.loads(GeoCode().api_request(query_text).response[0]) == locations[0]

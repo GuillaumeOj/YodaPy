@@ -38,4 +38,4 @@ class TestParser:
         self.PARSER._parsed_input = "tu me dire ou trouver la tour eiffel"
         self.PARSER.clear_question()
         result = self.PARSER._parsed_input
-        assert result == "tour eiffel"
+        assert result == "trouver tour eiffel"

@@ -1,3 +1,4 @@
+import json
 from app.wiki_search import WikiSearch
 
 
@@ -32,15 +33,24 @@ class TestWikiSearch:
                     }
                 }
 
+        def mock_random_choice(articles):
+            return articles[0]
+
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert WikiSearch().geodata_request("query_text")["content"] == articles[0]
+
+        monkeypatch.setattr("app.wiki_search.choice", mock_random_choice)
+        result = WikiSearch().geodata_request("query_text").response
+        assert (
+            json.loads(WikiSearch().geodata_request("query_text").response[0])
+            == articles[0]
+        )
 
     def test_text_request(self, monkeypatch):
         pageid = 5828872
         text = {
             "title": "Buste de Gustave Eiffel par Antoine Bourdelle",
             "extract": "Le buste de Gustave Eiffel par Antoine Bourdelle",
-            "url": "https://fr.wikipedia.org/wiki/Buste de Gustave Eiffel par Antoine Bourdelle",
+            "url": "https://fr.wikipedia.org/wiki/Buste%20de%20Gustave%20Eiffel%20par%20Antoine%20Bourdelle",
         }
 
         class MockRequestGet:
@@ -61,4 +71,4 @@ class TestWikiSearch:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert WikiSearch().text_request(pageid)["content"] == text
+        assert json.loads(WikiSearch().text_request(pageid).response[0]) == text
