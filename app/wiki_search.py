@@ -1,6 +1,7 @@
 import requests
 import json
 from urllib.parse import urljoin, quote
+from random import choice
 
 
 from flask import Response
@@ -9,11 +10,26 @@ from app import app
 
 
 class WikiSearch:
+    """WikiSearch.
+    Search articles around geographics coordinates."""
+
     def __init__(self):
         self.wiki_api_url = app.config["WIKI_API_URL"]
         self.wiki_url = app.config["WIKI_URL"]
 
-    def geodata_request(self, query_coordinates):
+    def geodata_request(self, query_coordinates: list) -> object:
+        """Get articles near coordinates and return one choose randomly.
+
+        Parameters
+        ----------
+        query_coordinates : list
+            query_coordinates
+
+        Returns
+        -------
+        object
+
+        """
         parameters = {
             "action": "query",
             "format": "json",
@@ -41,15 +57,29 @@ class WikiSearch:
 
             if articles:
                 status_code = response.status_code
-                content = min(articles, key=lambda article: article["dist"])
+                # Keep only one article choosen randomly
+                # content = min(articles, key=lambda article: article["dist"])
+                content = choice(articles)
             else:
                 status_code = 404
 
+        # Return the result as an HTTP response with a JSON body
         content = json.dumps(content, indent=4)
-
         return Response(response=content, mimetype="application/json", status=status_code)
 
-    def text_request(self, pageid):
+    def text_request(self, pageid: int) -> object:
+        """Get the introduction for a specific article using his id.
+
+        Parameters
+        ----------
+        pageid : int
+            pageid
+
+        Returns
+        -------
+        object
+
+        """
         parameters = {
             "action": "query",
             "format": "json",
@@ -74,16 +104,13 @@ class WikiSearch:
                 "extract": text["extract"].replace("\n", ""),
             }
 
-            # Build an url for the front
+            # Build an url for getting the article
             encoded_url = quote(content["title"])
             article_url = urljoin(self.wiki_url, encoded_url)
             content["url"] = article_url
 
-        # Return the http status code else
-        # return {"content": content, "status_code": response.status_code}
-
+        # Return the result as an HTTP response with a JSON body
         content = json.dumps(content, indent=4)
-
         return Response(
             response=content, mimetype="application/json", status=response.status_code
         )
