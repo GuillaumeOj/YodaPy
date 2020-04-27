@@ -1,6 +1,7 @@
 import requests
 import json
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote
+
 
 from flask import Response
 
@@ -74,7 +75,8 @@ class WikiSearch:
             }
 
             # Build an url for the front
-            article_url = urljoin(self.wiki_url, content["title"], allow_fragments=False)
+            encoded_url = quote(content["title"])
+            article_url = urljoin(self.wiki_url, encoded_url)
             content["url"] = article_url
 
         # Return the http status code else
