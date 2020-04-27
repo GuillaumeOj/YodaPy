@@ -44,7 +44,6 @@ class Parser:
         else:
             status_code = 404
 
-        # return {"content": self._parsed_input, "status_code": status_code}
         return Response(
             response=self._parsed_input, mimetype="application/json", status=status_code,
         )
