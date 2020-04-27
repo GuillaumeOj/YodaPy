@@ -54,6 +54,7 @@ class WikiSearch:
             "format": "json",
             "prop": "extracts",
             "explaintext": True,
+            "exchars": 250,
             "pageids": pageid,
             "exintro": True,
         }
