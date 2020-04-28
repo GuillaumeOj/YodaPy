@@ -62,8 +62,14 @@ class WikiSearch:
 
             if articles:
                 status_code = response.status_code
+
                 # Keep only one article choosen randomly
                 content = min(articles, key=lambda article: article["index"])
+
+                # Build an url for getting the article
+                encoded_url = quote(content["title"])
+                article_url = urljoin(self.wiki_url, encoded_url)
+                content["url"] = article_url
             else:
                 status_code = 404
 
