@@ -21,7 +21,7 @@ class Parser:
             self.stopwords = json.load(json_f)
 
         # Load keywords for the question from a json file
-        keywords_path = os.path.join(current_dir, "static/json/question_keywords.json")
+        keywords_path = os.path.join(current_dir, "static/json/keywords.json")
         self.keywords = []
         with open(keywords_path) as json_f:
             self.keywords = json.load(json_f)
