@@ -1,4 +1,3 @@
-import json
 from app.wiki_search import WikiSearch
 
 
@@ -33,17 +32,11 @@ class TestWikiSearch:
                     }
                 }
 
-        def mock_random_choice(articles):
-            return articles[0]
-
         monkeypatch.setattr("requests.get", MockRequestGet)
 
-        monkeypatch.setattr("app.wiki_search.choice", mock_random_choice)
-        result = WikiSearch().geodata_request("query_text").response
-        assert (
-            json.loads(WikiSearch().geodata_request("query_text").response[0])
-            == articles[0]
-        )
+        result = WikiSearch().geodata_request("query_text").get_json()
+
+        assert result == articles[0]
 
     def test_text_request(self, monkeypatch):
         pageid = 5828872
@@ -71,4 +64,7 @@ class TestWikiSearch:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        assert json.loads(WikiSearch().text_request(pageid).response[0]) == text
+
+        result = WikiSearch().text_request(pageid).get_json()
+
+        assert result == text
