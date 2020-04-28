@@ -1,8 +1,6 @@
 import requests
 import json
 from urllib.parse import urljoin, quote
-from random import choice
-
 
 from flask import Response
 
@@ -58,8 +56,7 @@ class WikiSearch:
             if articles:
                 status_code = response.status_code
                 # Keep only one article choosen randomly
-                # content = min(articles, key=lambda article: article["dist"])
-                content = choice(articles)
+                content = min(articles, key=lambda article: article["dist"])
             else:
                 status_code = 404
 
