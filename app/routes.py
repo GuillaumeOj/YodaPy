@@ -38,24 +38,10 @@ def process():
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
-                # Invert coordinates between MapBox and Wikipedia
-                wiki_coordinates = [
-                    content["map"]["center"][1],
-                    content["map"]["center"][0],
-                ]
 
-                wiki_article_info = wiki_search.geodata_request(wiki_coordinates)
-
-                if wiki_article_info.status_code == 200:
-                    content["article_info"] = wiki_article_info.get_json()
-
-                    # Get the content of the article
-                    wiki_article = wiki_search.text_request(
-                        content["article_info"]["pageid"]
-                    )
-
-                    if wiki_article.status_code == 200:
-                        content["article"] = wiki_article.get_json()
+                wiki_page = wiki_search.search_article(content["map"]["text"])
+                if wiki_page.status_code == 200:
+                    content["article"] = wiki_page.get_json()
 
     if content:
         status_code = 200
