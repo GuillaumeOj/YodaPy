@@ -83,7 +83,7 @@ function processUserInput() {
                 }
                 if ("article" in result) {
                     let article = result["article"]["extract"];
-                    let article_link = "<br /><a target='_blank' rel='noreferrer noopener' href='" + result["article"]["url"] + "'>[Lire la suite...]</a>";
+                    let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='" + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
                     article = article + article_link
                     createPost("incoming", article);
                 }
