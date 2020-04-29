@@ -24,5 +24,11 @@
         "Ta question je ne comprends pas. La connaissance je ne peux t'apprendre.",
         "Le côté obscur de la Force en toi je ressens. Te concentrer tu dois pour un lieu me demander.",
         "Missa maladroit ! Carrabouilli limousine bigboss ! Hum... Ta question je ne comprends pas."
+    ],
+    "instructions": [
+        "Une question sur un lieu tu formuleras. Des phrases tu feras, afin que répondre je puisse.",
+        "Exemple : \"Bonjour Yoda ! Ou est la tour Eiffel ? Merci.\"",
+        "Avancé mon âge est, mes réponses parfois étranges seront.",
+        "Pour revoir ces instructions, \":help\" tu m'écriras."
     ]
 }
