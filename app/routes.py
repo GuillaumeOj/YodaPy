@@ -66,3 +66,18 @@ def hello():
 
     content = json.dumps(content, indent=4)
     return Response(response=content, mimetype="application/json", status=status_code)
+
+
+@app.route("/wait", methods=["GET"])
+def wait():
+    """Wait message"""
+
+    content = Bot().wait
+
+    if content:
+        status_code = 200
+    else:
+        status_code = 404
+
+    content = json.dumps(content, indent=4)
+    return Response(response=content, mimetype="application/json", status=status_code)

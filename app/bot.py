@@ -37,6 +37,6 @@ class Bot:
     def wait(self):
         """Return a wait message"""
         message = choice(self.bot_dict["wait"])
-        message = {"bot_messages": [choice(message)]}
+        message = {"bot_messages": [message]}
 
         return message
