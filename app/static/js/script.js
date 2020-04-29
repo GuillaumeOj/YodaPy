@@ -1,134 +1,95 @@
-let feed= document.getElementById("feed");
-let feedMessages = document.querySelector("#feed > div");
-let writtingMessage = document.getElementById("message");
-let submitButton = document.getElementById("submit");
-let mapNumber = 0
+class Bot {
+    constructor(feed, form, waiting) {
+        this.feed = new Feed(feed, waiting);
 
-function clearMessage() {
-    writtingMessage.value = "";
-}
+        this.maps = new BotMap(this.feed);
 
-function createPost(author, content) {
-    let post = document.createElement("p");
-    post.classList.add("post", author);
-    if (author === "incoming") { // App input post as HTML
-        post.innerHTML = content;
-    } else { // User input post as text
-        post.textContent = content;
+        this.posts = new Post(this.feed);
+
+        this.form = form;
+        this.submitButton = this.form.querySelector("#submit");
+        this.user_input = this.form.querySelector("#message");
+
+        this.sayHello();
+        this.clearForm();
     }
 
-    feedMessages.appendChild(post);
-    feed.scrollTop = feed.scrollHeight;
-}
+    clearForm () {
+        this.user_input.value = "";
+    }
 
-function createMap(content) {
-    // Increment mapNUmber ofr unique ID
-    mapNumber++;
+    process() {
+        this.posts.newPost(this.user_input.value, "user");
 
-    // Create a div for the map
-    let mapDiv = document.createElement("div");
-    mapDiv.id = "map-" + mapNumber;
-    mapDiv.classList.add("post", "incoming", "map");
+        let formData = new FormData(this.form);
+        this.clearForm();
 
-    // Send the div in the fedd
-    feedMessages.appendChild(mapDiv);
-    feed.scrollTop = feed.scrollHeight;
+        this.feed.waitOn();
 
-    // Create the map
-    let map = new mapboxgl.Map({
-        container: mapDiv.id, // Container ID
-        style: "mapbox://styles/mapbox/streets-v10", // Map style to use
-        center: content["center"],// Starting position [lng, lat]
-        zoom: 14, // Starting zoom level
-    });
-
-    // Change map language for french
-    let language = new MapboxLanguage({
-        defaultLanguage: "fr"
-    });
-    map.addControl(language);
-
-    // Add a marker to the map
-    new mapboxgl.Marker() // initialize a new marker
-      .setLngLat(content["center"]) // Marker [lng, lat] coordinates
-      .addTo(map); // Add the marker to the map
-}
-
-function processUserInput() {
-    // Get the user message
-    let form = document.querySelector("#writing form")
-
-    // Post the user input in the feed
-    createPost("sent", form.querySelector("#message").value);
-
-    // Remove the class "hidden" for the waiting message
-    let waitingPost = document.getElementById("waiting");
-    feedMessages.appendChild(waitingPost);
-    waitingPost.classList.remove("hidden");
-    feed.scrollTop = feed.scrollHeight;
-
-    // Send the user input to "/process"
-    fetch("/process", {
-        method: "POST",
-        body: new FormData(form)
-    })
-        .then(response => response.json())
-        .then(result =>  {
-            if (Object.keys(result).length === 0) { // Si le résultat est nul
-                createPost("incoming", "Je suis un boloss je trouve pas");
-            } else {
-                if ("map" in result) {
-                    createPost("incoming", result["map"]["place_name"]);
-                    createMap(result["map"]);
-                }
-                if ("article" in result) {
-                    let article = result["article"]["extract"];
-                    let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='" + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
-                    article = article + article_link
-                    createPost("incoming", article);
-                }
-            }
-            waitingPost.classList.add("hidden");
-            feed.scrollTop = feed.scrollHeight;
+        fetch("/process", {
+            method: "POST",
+            body: formData
         })
-        .catch(error => console.log(error));
+            .then(response => response.json())
+            .then(result =>  {
+                this.feed.waitOff();
+                if (Object.keys(result).length === 0) { // Si le résultat est nul
+                    this.posts.newPost("Je trouve pô !", "bot");
+                } else {
+                    if ("map" in result) {
+                        this.posts.newPost(result["map"]["place_name"], "bot");
+                        this.maps.createMap(result["map"]["center"]);
+                    }
+                    if ("article" in result) {
+                        let article = result["article"]["extract"];
+                        let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='"
+                            + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
+                        article = article + article_link
+                        this.posts.newPost(article, "bot");
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+    }
 
-    // Clear the writing form
-    clearMessage();
+    sayHello() {
+        // Ask yoda to say hello!
+        fetch("/hello", {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(result => {
+                if ("bot_messages" in result) {
+                    for (message of result["bot_messages"]) {
+                        this.posts.newPost(message, "bot");
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+    }
 }
 
-writtingMessage.addEventListener("keydown", event =>  {
+let feed = document.getElementById("feed");
+let form = document.getElementById("form");
+let waiting = document.getElementById("waiting");
+
+let bot = new Bot(feed, form, waiting);
+
+bot.user_input.addEventListener("keydown", event =>  {
     // Event for using <Ctrl> or <Meta> + <Enter> for carriage return and <Enter> to submit message
     if (event.key == "Enter" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        writtingMessage.value += "\n";
-        writtingMessage.scrollTop = writtingMessage.scrollHeight;
-    } else if (event.key == "Enter" && writtingMessage.value) {
+        bot.user_input.value += "\n";
+        bot.user_input.scrollTop = bot.user_input.scrollHeight;
+    } else if (event.key == "Enter" && bot.user_input.value) {
         event.preventDefault();
-        processUserInput();
+        bot.process();
     }
 });
 
-submitButton.addEventListener("click", event => {
+bot.submitButton.addEventListener("click", event => {
     event.preventDefault();
-    if (writtingMessage.value) {
-        processUserInput();
+    if (bot.user_input.value) {
+        bot.process();
     }
 });
-
-// Execute Clear message in case the user refresh the page with a message already written
-clearMessage();
-
-// Ask yoda to say hello!
-fetch("/hello", {
-    method: "GET"
-})
-    .then(response => response.json())
-    .then(result => {
-        if ("bot_messages" in result) {
-            for (message of result["bot_messages"]) {
-                createPost("incoming", message);
-            }
-        }
-    })
-    .catch(error => console.log(error));

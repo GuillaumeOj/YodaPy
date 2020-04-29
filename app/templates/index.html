@@ -2,23 +2,26 @@
 
 {% block content %}
 <div id="content">
-	<div id="feed">
-		<div>
-			<p id="waiting" class="post incoming hidden">
-				<img src="{{ url_for('static', filename='img/loader.svg') }}" alt="loader" />
-			</p>
-		</div>
-	</div>
-	<div id="writing">
-		<form action="" method="post" novalidate>
-			{{ form.hidden_tag() }}
-			{{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu") }}
-			{{ form.submit() }}
-		</form>
-	</div>
+    <div id="feed">
+        <div>
+            <p id="waiting" class="post incoming hidden">
+                <img src="{{ url_for('static', filename='img/loader.svg') }}" alt="loader" />
+            </p>
+        </div>
+    </div>
+    <div id="writing">
+        <form id="form" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu") }}
+            {{ form.submit() }}
+        </form>
+    </div>
 </div>
 <script type="text/javascript">
-	mapboxgl.accessToken = "{{ config['GEO_TOKEN'] }}"
+    mapboxgl.accessToken = "{{ config['GEO_TOKEN'] }}";
 </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/post.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/feed.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/botmap.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}
