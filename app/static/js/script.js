@@ -118,3 +118,17 @@ submitButton.addEventListener("click", event => {
 
 // Execute Clear message in case the user refresh the page with a message already written
 clearMessage();
+
+// Ask yoda to say hello!
+fetch("/hello", {
+    method: "GET"
+})
+    .then(response => response.json())
+    .then(result => {
+        if ("bot_messages" in result) {
+            for (message of result["bot_messages"]) {
+                createPost("incoming", message);
+            }
+        }
+    })
+    .catch(error => console.log(error));

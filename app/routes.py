@@ -8,6 +8,7 @@ from app.forms import MessageFieldsForm
 from app.parser import Parser
 from app.geo_code import GeoCode
 from app.wiki_search import WikiSearch
+from app.bot import Bot
 
 
 @app.route("/")
@@ -42,6 +43,21 @@ def process():
                 wiki_page = wiki_search.search_article(content["map"]["text"])
                 if wiki_page.status_code == 200:
                     content["article"] = wiki_page.get_json()
+
+    if content:
+        status_code = 200
+    else:
+        status_code = 404
+
+    content = json.dumps(content, indent=4)
+    return Response(response=content, mimetype="application/json", status=status_code)
+
+
+@app.route("/hello", methods=["GET"])
+def hello():
+    """Hello page"""
+
+    content = Bot().hello
 
     if content:
         status_code = 200
