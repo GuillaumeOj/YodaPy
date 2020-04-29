@@ -102,21 +102,21 @@ footer a:hover {
     grid-gap: 10px;
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 /* Discussion feed beetween the user and the bot */
 #feed, #http_error {
     margin: 0;
     grid-row: 1;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 #feed {
     background: black;
     border: 1px solid #343434;
     border-radius: 15px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Div hack for getting a 20px margin beetweens messages and fedd border */
