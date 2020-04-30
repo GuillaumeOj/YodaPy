@@ -129,11 +129,12 @@ footer a:hover {
 .post {
     margin: 0;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 8px;
     max-width: 70%;
     border-radius: 15px;
     white-space: pre-line;
     font-size: 14px;
+    line-height: 1.3em;
 }
 
 /* Erase the margin for the last post */
@@ -141,13 +142,8 @@ footer a:hover {
     margin: 0;
 }
 
-.post p {
-    margin: 0;
-}
-
 .post a:hover {
     text-decoration: underline;
-    font-weight: bold;
     color: #f0f7ee;
 }
 
@@ -186,12 +182,15 @@ footer a:hover {
 }
 
 #writing form {
+    margin-left : 10px;
+    margin-right: 10px;
     display: grid;
     grid-template-columns: 1fr 80px;
     column-gap: 10px;
 }
 
-#writing #message {
+#message {
+    margin-left: 5px;
     padding: 5px;
     padding-left: 15px;
     display: block;
@@ -205,7 +204,11 @@ footer a:hover {
     resize: none;
 }
 
-#writing #submit {
+#message:focus {
+    box-shadow: 0px 0px 5px 0px #f0f7ee;
+}
+
+#submit {
     -webkit-appearance: none;
     display: block;
     margin: 0;
@@ -215,6 +218,10 @@ footer a:hover {
     border-radius: 5px;
     color: #f0f7ee;
     font-size: 14px;
+}
+
+#submit:hover {
+    box-shadow: 0 0 20px #52489c;
 }
 
 #http_error {
