@@ -1,8 +1,8 @@
 {
     "found_place": [
-        "Une adresse j'ai trouvé. Intéressante pour toi sera-t-elle ?",
-        "Une concordance, dans la Force j'ai trouvé :",
-        "Les archivistes ce résultat m'ont communiqué :"
+        "Un endroit j'ai trouvé. Sur la carte je te montre :",
+        "Grâce à la Force j'ai trouvé :",
+        "Un endroit sur une planète fort fort lointaine j'ai trouvé :"
     ],
     "found_article": [
         "Plus d'informations grâce à la Force j'ai trouvé :",
@@ -10,8 +10,8 @@
         "Sur l'internet, des informations supplémentaires j'ai trouvé :"
     ],
     "hello": [
-        "Je te salue jeune padawan. Sur le chemin de le connaissance t'accompagner je vais.",
-        "Bonjour jeune padawan. Soif de connaissance en toi je ressens.",
+        "Je te salue jeune padawan. Chercher un lieu je vais t'aider.",
+        "Bonjour jeune padawan. Que la Force soit avec toi.",
         "Le·a bienvenue jeune padawan tu es."
     ],
     "not_found": [
@@ -19,7 +19,7 @@
         "Ce lieu dans les archives je ne trouve pas. Plus précis tu dois être."
     ],
     "parse_error": [
-        "Ta question je ne comprends pas. La connaissance je ne peux t'apprendre.",
+        "Ta question je ne comprends pas.",
         "Le côté obscur de la Force en toi je ressens. Te concentrer tu dois pour un lieu me demander.",
         "Missa maladroit ! Carrabouilli limousine bigboss ! Hum... Ta question je ne comprends pas."
     ],
