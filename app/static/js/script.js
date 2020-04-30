@@ -38,18 +38,18 @@ class Bot {
             .then(response => {
                 this.feed.waitOff();
                 let status_code = response.status;
-                if (status_code == 200) {
+                if (status_code < 300) {
                     return response.json();
-                } else if (status_code == 204) {
-                    throw new Error("Not found");
                 } else {
                     throw new Error("Fatal error");
                 }
             })
             .then(result =>  {
+                if ("bot_error" in result) {
+                    this.posts.newPost(result["bot_error"], "bot");
+                }
                 if ("map" in result) {
-
-                    let postMessage = result["map"]["bot_messages"][0];
+                    let postMessage = result["map"]["bot_message"];
                     postMessage += "\n";
                     postMessage += result["map"]["place_name"];
 
@@ -61,35 +61,22 @@ class Bot {
                     let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='"
                         + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
                     article = article + article_link
+
                     this.posts.newPost(article, "bot");
                 }
             })
             .catch(error => {
-                if (error.message == "Not found") {
-                    fetch("/not_found", {
-                        method: "GET",
-                        headers: this.HttpHeaders
+                fetch("/error", {
+                    method: "GET",
+                    headers: this.HttpHeaders
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        for (message of result["bot_messages"]) {
+                            this.posts.newPost(message, "bot");
+                        }
                     })
-                        .then(response => response.json())
-                        .then(result => {
-                            for (message of result["bot_messages"]) {
-                                this.posts.newPost(message, "bot");
-                            }
-                        })
-                        .catch(error => console.log(error));
-                } else {
-                    fetch("/error", {
-                        method: "GET",
-                        headers: this.HttpHeaders
-                    })
-                        .then(response => response.json())
-                        .then(result => {
-                            for (message of result["bot_messages"]) {
-                                this.posts.newPost(message, "bot");
-                            }
-                        })
-                        .catch(error => console.log(error));
-                }
+                    .catch(error => console.log(error));
             });
     }
 
@@ -100,10 +87,8 @@ class Bot {
         })
             .then(response => response.json())
             .then(result => {
-                if ("bot_messages" in result) {
-                    for (message of result["bot_messages"]) {
-                        this.posts.newPost(message, "bot");
-                    }
+                if ("bot_message" in result) {
+                    this.posts.newPost(result["bot_message"], "bot");
                 }
             })
             .catch(error => console.log(error));
