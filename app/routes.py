@@ -60,12 +60,7 @@ def hello():
 
     content = Bot().hello
 
-    if content:
-        status_code = 200
-    else:
-        status_code = 204
-
-    return jsonify(content), status_code
+    return jsonify(content)
 
 
 @app.route("/error", methods=["GET"])
