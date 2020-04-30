@@ -10,9 +10,10 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Parser:
+    """Parse a user input"""
+
     def __init__(self):
-        self._user_input = ""
-        self._parsed_input = ""
+        self.parsed_input = ""
 
         # Load stopwords from a json file
         stopwords_path = os.path.join(current_dir, "static/json/stopwords.json")
@@ -27,63 +28,58 @@ class Parser:
             self.keywords = json.load(json_f)
 
     def parse(self, user_input):
-        self._user_input = user_input
-        self._parsed_input = self._user_input
+        """Launch each method for parsing the user input"""
+        self.parsed_input = user_input
 
-        self.lower_text()
-        self.remove_accents()
+        self.normalize()
         self.split_sentences()
         self.find_question()
         self.clear_question()
 
-        if self._parsed_input:
-            self._parsed_input = json.dumps(
-                {"parsed_input": self._parsed_input}, indent=4
-            )
-            status_code = 200
-        else:
-            status_code = 404
+        if self.parsed_input:
+            self.parsed_input = {"parsed_input": self.parsed_input}
 
-        return Response(
-            response=self._parsed_input, mimetype="application/json", status=status_code,
-        )
+        return self.parsed_input
 
-    def lower_text(self):
-        self._parsed_input = self._parsed_input.lower()
+    def normalize(self):
+        """Lower and replace accents"""
+        self.parsed_input = self.parsed_input.lower()
 
-    def remove_accents(self):
-        unicode_text = unicodedata.normalize("NFD", self._parsed_input)
+        unicode_text = unicodedata.normalize("NFD", self.parsed_input)
         ascii_unaccented = unicode_text.encode("ascii", "ignore")
-        self._parsed_input = ascii_unaccented.decode("utf8")
+        self.parsed_input = ascii_unaccented.decode("utf8")
 
     def split_sentences(self):
+        """Split the input in a list of sentences"""
         sentences = []
         start = 0
-        for i, character in enumerate(self._parsed_input):
+        for i, character in enumerate(self.parsed_input):
             if character in "?.!,":
-                sentences.append(self._parsed_input[start:i].strip())
+                sentences.append(self.parsed_input[start:i].strip())
                 start = i + 1
         if sentences:
-            self._parsed_input = sentences
+            self.parsed_input = sentences
         else:
-            self._parsed_input = [self._parsed_input]
+            self.parsed_input = [self.parsed_input]
 
     def find_question(self):
+        """Find the question in a list of sentences"""
         question = []
         for keyword in self.keywords:
-            for sentence in self._parsed_input:
+            for sentence in self.parsed_input:
                 if keyword in sentence:
                     question.append(sentence)
 
         # Keep only the last question
         if question:
-            self._parsed_input = question[-1]
+            self.parsed_input = question[-1]
         else:
-            self._parsed_input = ""
+            self.parsed_input = ""
 
     def clear_question(self):
+        """Remove useless words (stopwords and keywords)"""
         # Remove quotes
-        removed_quotes = self._parsed_input.replace("'", " ")
+        removed_quotes = self.parsed_input.replace("'", " ")
         removed_hyphens = removed_quotes.replace("-", " ")
         splited_question = removed_hyphens.split()
 
@@ -97,4 +93,4 @@ class Parser:
             if word not in self.stopwords and len(word) > 1
         ]
 
-        self._parsed_input = " ".join(parsed_question)
+        self.parsed_input = " ".join(parsed_question)
