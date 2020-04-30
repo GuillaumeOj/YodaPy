@@ -30,7 +30,7 @@
     ],
     "instructions": [
         "Une question sur un lieu tu formuleras. Des phrases tu feras, afin que répondre je puisse.",
-        "Exemple : \"Bonjour Yoda ! Ou est la tour Eiffel ? Merci.\"",
+        "Exemple : \"Bonjour Yoda ! Où est la tour Eiffel ? Merci.\"",
         "Avancé mon âge est, mes réponses parfois étranges seront.",
         "Pour revoir ces instructions, \":help\" tu m'écriras."
     ]
