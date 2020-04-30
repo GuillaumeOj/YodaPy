@@ -3,7 +3,6 @@ from app.geo_code import GeoCode
 
 class TestGeoCode:
     def test_api_request(self, monkeypatch):
-        query_text = {"parsed_input": "query text"}
         locations = [
             {
                 "relevance": 1,
@@ -45,5 +44,5 @@ class TestGeoCode:
                 }
 
         monkeypatch.setattr("requests.get", MockRequestGet)
-        result = GeoCode().api_request(query_text).get_json()
+        result = GeoCode().api_request("query_text")
         assert result == locations[0]
