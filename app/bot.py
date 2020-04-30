@@ -40,3 +40,11 @@ class Bot:
         message = {"bot_messages": [message]}
 
         return message
+
+    @property
+    def error(self):
+        """Return an error message"""
+        message = choice(self.bot_dict["error"])
+        message = {"bot_messages": [message]}
+
+        return message
