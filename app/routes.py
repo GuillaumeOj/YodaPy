@@ -24,33 +24,33 @@ def process():
 
     content = {}
 
+    app.logger.info(request.form["message"])
     if "message" in request.form:
         # Parse the user input
         parser = Parser()
         parser_response = parser.parse(request.form["message"])
 
-        if parser_response.status_code == 200:
+        if "parsed_input" in parser_response:
             # Send the parsed input to the geo code api
             geo_code = GeoCode()
-            geo_response = geo_code.api_request(parser_response.get_json())
+            geo_response = geo_code.api_request(parser_response["parsed_input"])
 
-            if geo_response.status_code == 200:
-                content["map"] = geo_response.get_json()
+            if "place_name" in geo_response:
+                content["map"] = geo_response
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
+                wiki_response = wiki_search.search_article(content["map"]["text"])
 
-                wiki_page = wiki_search.search_article(content["map"]["text"])
-                if wiki_page.status_code == 200:
-                    content["article"] = wiki_page.get_json()
+                if "url" in wiki_response:
+                    content["article"] = wiki_response
 
     if content:
         status_code = 200
     else:
-        status_code = 404
+        status_code = 204
 
-    content = json.dumps(content, indent=4)
-    return Response(response=content, mimetype="application/json", status=status_code)
+    return jsonify(content), status_code
 
 
 @app.route("/hello", methods=["GET"])
@@ -62,10 +62,9 @@ def hello():
     if content:
         status_code = 200
     else:
-        status_code = 404
+        status_code = 204
 
-    content = json.dumps(content, indent=4)
-    return Response(response=content, mimetype="application/json", status=status_code)
+    return jsonify(content), status_code
 
 
 @app.route("/wait", methods=["GET"])
@@ -77,7 +76,20 @@ def wait():
     if content:
         status_code = 200
     else:
-        status_code = 404
+        status_code = 204
 
-    content = json.dumps(content, indent=4)
-    return Response(response=content, mimetype="application/json", status=status_code)
+    return jsonify(content), status_code
+
+
+@app.route("/error", methods=["GET"])
+def bot_error():
+    """Error message from the bot"""
+
+    content = Bot().error
+
+    if content:
+        status_code = 200
+    else:
+        status_code = 204
+
+    return jsonify(content), status_code
