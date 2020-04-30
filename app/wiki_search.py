@@ -35,27 +35,29 @@ class WikiSearch:
 
         # Return the nearest article if response is ok
         if response.ok:
-            articles = response.json()["query"]["pages"]
-            articles = list(articles.values())
+            articles = response.json()
+            if "query" in articles:
+                articles = articles["query"]["pages"]
+                articles = list(articles.values())
 
-            # Keep only the data we need
-            app.logger.info(articles)
-            articles = [
-                {
-                    "index": article["index"],
-                    "title": article["title"],
-                    "extract": article["extract"],
-                }
-                for article in articles
-            ]
+                # Keep only the data we need
+                app.logger.info(articles)
+                articles = [
+                    {
+                        "index": article["index"],
+                        "title": article["title"],
+                        "extract": article["extract"],
+                    }
+                    for article in articles
+                ]
 
-            if articles:
-                # Keep only one article choosen randomly
-                content = min(articles, key=lambda article: article["index"])
+                if articles:
+                    # Keep only one article choosen randomly
+                    content = min(articles, key=lambda article: article["index"])
 
-                # Build an url for getting the article
-                encoded_url = quote(content["title"])
-                article_url = urljoin(self.wiki_url, encoded_url)
-                content["url"] = article_url
+                    # Build an url for getting the article
+                    encoded_url = quote(content["title"])
+                    article_url = urljoin(self.wiki_url, encoded_url)
+                    content["url"] = article_url
 
         return content
