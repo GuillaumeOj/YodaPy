@@ -46,9 +46,9 @@ class Bot:
         return message
 
     @property
-    def answer(self):
-        """Return an answer message"""
-        return self.random_choice("answer")
+    def found_place(self):
+        """Return a bot message if a place is found"""
+        return self.random_choice("found_place")
 
     @property
     def found_article(self):

@@ -37,7 +37,7 @@ def process():
             if "place_name" in geo_response:
                 status_code = 200
                 content["map"] = geo_response
-                content["map"].update(Bot().answer)
+                content["map"].update(Bot().found_place)
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
