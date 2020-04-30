@@ -48,7 +48,12 @@ class Bot {
             })
             .then(result =>  {
                 if ("map" in result) {
-                    this.posts.newPost(result["map"]["place_name"], "bot");
+
+                    let postMessage = result["map"]["bot_messages"][0];
+                    postMessage += "\n";
+                    postMessage += result["map"]["place_name"];
+
+                    this.posts.newPost(postMessage, "bot");
                     this.maps.createMap(result["map"]["center"]);
                 }
                 if ("article" in result) {

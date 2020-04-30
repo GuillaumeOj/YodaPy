@@ -24,7 +24,6 @@ def process():
 
     content = {}
 
-    app.logger.info(request.form["message"])
     if "message" in request.form:
         # Parse the user input
         parser = Parser()
@@ -37,6 +36,7 @@ def process():
 
             if "place_name" in geo_response:
                 content["map"] = geo_response
+                content["map"].update(Bot().answer)
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
