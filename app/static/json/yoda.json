@@ -25,6 +25,11 @@
         "Le côté obscur de la Force en toi je ressens. Te concentrer tu dois pour un lieu me demander.",
         "Missa maladroit ! Carrabouilli limousine bigboss ! Hum... Ta question je ne comprends pas."
     ],
+    "error": [
+        "Mes neurones grillés sont. Te répondre je ne puis.",
+        "L'encyclopèdie, perdue j'ai. T'aider je ne puis.",
+        "En repos aller je dois. Revenir plus tard je te conseille."
+    ],
     "instructions": [
         "Une question sur un lieu tu formuleras. Des phrases tu feras, afin que répondre je puisse.",
         "Exemple : \"Bonjour Yoda ! Ou est la tour Eiffel ? Merci.\"",

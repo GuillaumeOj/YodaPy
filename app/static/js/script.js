@@ -10,6 +10,10 @@ class Bot {
         this.submitButton = this.form.querySelector("#submit");
         this.user_input = this.form.querySelector("#message");
 
+        this.HttpHeaders = new Headers();
+        this.HttpHeaders.append("Keep-Alive", "timeout=10");
+
+
         this.sayHello();
         this.clearForm();
     }
@@ -28,7 +32,8 @@ class Bot {
 
         fetch("/process", {
             method: "POST",
-            body: formData
+            body: formData,
+            headers: this.HttpHeaders
         })
             .then(response => response.json())
             .then(result =>  {
@@ -49,7 +54,21 @@ class Bot {
                     }
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                this.feed.waitOff()
+                console.log(error)
+                fetch("/error", {
+                    method: "GET",
+                    headers: this.HttpHeaders
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        for (message of result["bot_messages"]) {
+                            this.posts.newPost(message, "bot");
+                        }
+                    })
+                    .catch(error => console.log(error));
+            });
     }
 
     sayHello() {
