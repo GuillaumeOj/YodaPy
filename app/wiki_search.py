@@ -1,5 +1,4 @@
 import requests
-import json
 from urllib.parse import urljoin, quote
 
 from flask import Response
@@ -15,19 +14,9 @@ class WikiSearch:
         self.wiki_api_url = app.config["WIKI_API_URL"]
         self.wiki_url = app.config["WIKI_URL"]
 
-    def search_article(self, query_text: str) -> object:
-        """Get articles near coordinates and return one choose randomly.
-
-        Parameters
-        ----------
-        query_text : str
-            query_text
-
-        Returns
-        -------
-        object
-
-        """
+    def search_article(self, query_text):
+        """Get articles near coordinates and return one choose randomly."""
+        # Query parameters
         parameters = {
             "action": "query",
             "format": "json",
@@ -61,8 +50,6 @@ class WikiSearch:
             ]
 
             if articles:
-                status_code = response.status_code
-
                 # Keep only one article choosen randomly
                 content = min(articles, key=lambda article: article["index"])
 
@@ -70,9 +57,5 @@ class WikiSearch:
                 encoded_url = quote(content["title"])
                 article_url = urljoin(self.wiki_url, encoded_url)
                 content["url"] = article_url
-            else:
-                status_code = 404
 
-        # Return the result as an HTTP response with a JSON body
-        content = json.dumps(content, indent=4)
-        return Response(response=content, mimetype="application/json", status=status_code)
+        return content

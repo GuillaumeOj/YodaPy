@@ -8,16 +8,19 @@ class TestWikiSearch:
                 "index": 3,
                 "title": "Buste de Gustave Eiffel par Antoine Bourdelle",
                 "extract": "Ceci est un extrait",
+                "url": "https://fr.wikipedia.org/wiki/Buste‰20de‰20Gustave%20Eiffel%20par%20Antoine%20Bourdelle",
             },
             {
                 "index": 1,
                 "title": "Tour Eiffel",
                 "extract": "Ceci est un autre extrait qui devrait sortir de la méthode.",
+                "url": "https://fr.wikipedia.org/wiki/Tour%20Eiffel",
             },
             {
                 "index": 2,
                 "title": "Le Jules Verne",
                 "extract": "Ceci est le dernier extrait",
+                "url": "https://fr.wikipedia.org/wiki/Le%20Jules%20Verne",
             },
         ]
 
@@ -42,6 +45,6 @@ class TestWikiSearch:
 
         monkeypatch.setattr("requests.get", MockRequestGet)
 
-        result = WikiSearch().search_article("query_text").get_json()
+        result = WikiSearch().search_article("query_text")
 
         assert result == articles[1]
