@@ -93,3 +93,17 @@ def bot_error():
         status_code = 204
 
     return jsonify(content), status_code
+
+
+@app.route("/not_found", methods=["GET"])
+def not_found():
+    """Not found message from the bot"""
+
+    content = Bot().not_found
+
+    if content:
+        status_code = 200
+    else:
+        status_code = 204
+
+    return jsonify(content), status_code

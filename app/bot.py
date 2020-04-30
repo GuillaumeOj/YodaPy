@@ -15,11 +15,17 @@ class Bot:
         with open(json_path) as json_file:
             self.bot_dict = json.load(json_file)
 
+    def random_choice(self, dict_key):
+        """Return a random choice in a dict"""
+        choosen_message = choice(self.bot_dict[dict_key])
+        choosen_message = {"bot_messages": [choosen_message]}
+
+        return choosen_message
+
     @property
     def hello(self):
         """Say hello!"""
-        message = self.bot_dict["hello"]
-        message = {"bot_messages": [choice(message)]}
+        message = self.random_choice("hello")
 
         # Add instructions
         message["bot_messages"].append(self.instructions)
@@ -36,15 +42,14 @@ class Bot:
     @property
     def wait(self):
         """Return a wait message"""
-        message = choice(self.bot_dict["wait"])
-        message = {"bot_messages": [message]}
-
-        return message
+        return self.random_choice("wait")
 
     @property
     def error(self):
         """Return an error message"""
-        message = choice(self.bot_dict["error"])
-        message = {"bot_messages": [message]}
+        return self.random_choice("error")
 
-        return message
+    @property
+    def not_found(self):
+        """Return a not found message"""
+        return self.random_choice("not_found")
