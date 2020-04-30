@@ -28,7 +28,7 @@ class Bot {
         let formData = new FormData(this.form);
         this.clearForm();
 
-        this.sayWait();
+        this.feed.waitOn();
 
         fetch("/process", {
             method: "POST",
@@ -99,23 +99,6 @@ class Bot {
                     for (message of result["bot_messages"]) {
                         this.posts.newPost(message, "bot");
                     }
-                }
-            })
-            .catch(error => console.log(error));
-    }
-
-    sayWait() {
-        // Ask yoda to say wait!
-        fetch("/wait", {
-            method: "GET"
-        })
-            .then(response => response.json())
-            .then(result => {
-                if ("bot_messages" in result) {
-                    for (message of result["bot_messages"]) {
-                        this.posts.newPost(message, "bot");
-                    }
-                    this.feed.waitOn();
                 }
             })
             .catch(error => console.log(error));

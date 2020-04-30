@@ -40,11 +40,6 @@ class Bot:
         return message
 
     @property
-    def wait(self):
-        """Return a wait message"""
-        return self.random_choice("wait")
-
-    @property
     def error(self):
         """Return an error message"""
         return self.random_choice("error")

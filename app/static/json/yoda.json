@@ -1,15 +1,8 @@
 {
-    "wait": [
-        "Patient·e tu dois être jeune padawan. Réfléchir je suis en train.",
-        "Chercher la connaissance je suis en train.",
-        "Plusieurs chemins mênent à la connaissance. Le meilleur pour toi je vais trouver jeune padawan.",
-        "Un instant je te demande jeune padawan."
-    ],
     "answer": [
-        "Ce que tu as appris, toujours tu transmettras.",
-        "Puissant·e tu es devenu·e, la connaissance en toi je ressens.",
-        "Oublier ce que tu as appris tu dois, la véritable connaissance ici je te donnes.",
-        "Vers la connaissance tu te diriges. Cette information je te délivres."
+        "Une adresse j'ai trouvé. Intéressante pour toi sera-t-elle ?",
+        "Une concordance, dans la Force j'ai trouvé.",
+        "Les archivistes ce résultat m'ont communiqué."
     ],
     "hello": [
         "Je te salue jeune padawan. Sur le chemin de le connaissance t'accompagner je vais.",

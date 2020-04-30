@@ -67,20 +67,6 @@ def hello():
     return jsonify(content), status_code
 
 
-@app.route("/wait", methods=["GET"])
-def wait():
-    """Wait message"""
-
-    content = Bot().wait
-
-    if content:
-        status_code = 200
-    else:
-        status_code = 204
-
-    return jsonify(content), status_code
-
-
 @app.route("/error", methods=["GET"])
 def bot_error():
     """Error message from the bot"""
