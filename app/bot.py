@@ -33,7 +33,7 @@ class Bot:
     def hello(self):
         """Say hello!"""
         message = self.random_choice("hello")
-        message["bot_message"] += "\n"
+        message["bot_message"] += "\n\n"
         message["bot_message"] += self.instructions["bot_message"]
 
         return message
