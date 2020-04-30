@@ -48,6 +48,9 @@ class Bot {
                 if ("bot_error" in result) {
                     this.posts.newPost(result["bot_error"], "bot");
                 }
+                if ("bot_message" in result) {
+                    this.posts.newPost(result["bot_message"], "bot");
+                }
                 if ("map" in result) {
                     let postMessage = result["map"]["bot_message"];
                     postMessage += "\n";

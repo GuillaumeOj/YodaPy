@@ -34,14 +34,14 @@ class Bot:
         """Say hello!"""
         message = self.random_choice("hello")
         message["bot_message"] += "\n"
-        message["bot_message"] += self.instructions
+        message["bot_message"] += self.instructions["bot_message"]
 
         return message
 
     @property
     def instructions(self):
         """Return the bot instructions"""
-        message = "\n".join(self.bot_dict["instructions"])
+        message = {"bot_message": "\n".join(self.bot_dict["instructions"])}
 
         return message
 

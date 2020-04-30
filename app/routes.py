@@ -10,6 +10,8 @@ from app.geo_code import GeoCode
 from app.wiki_search import WikiSearch
 from app.bot import Bot
 
+bot = Bot()
+
 
 @app.route("/")
 def index():
@@ -24,7 +26,10 @@ def process():
 
     content = {}
 
-    if "message" in request.form:
+    if "message" in request.form and ":help" in request.form["message"]:
+        # Display instructions if the user type :help
+        content = bot.instructions
+    elif "message" in request.form:
         # Parse the user input
         parser = Parser()
         parser_response = parser.parse(request.form["message"])
@@ -37,7 +42,7 @@ def process():
             if "place_name" in geo_response:
                 status_code = 200
                 content["map"] = geo_response
-                content["map"].update(Bot().found_place)
+                content["map"].update(bot.found_place)
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
@@ -45,11 +50,11 @@ def process():
 
                 if "url" in wiki_response:
                     content["article"] = wiki_response
-                    content["article"].update(Bot().found_article)
+                    content["article"].update(bot.found_article)
             else:
-                content = Bot().not_found
+                content = bot.not_found
         else:
-            content = Bot().parse_error
+            content = bot.parse_error
 
     return jsonify(content)
 
@@ -58,7 +63,7 @@ def process():
 def hello():
     """Hello page"""
 
-    content = Bot().hello
+    content = bot.hello
 
     return jsonify(content)
 
@@ -67,6 +72,6 @@ def hello():
 def bot_error():
     """Error message from the bot"""
 
-    content = Bot().error
+    content = bot.error
 
     return jsonify(content)
