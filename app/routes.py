@@ -35,6 +35,7 @@ def process():
             geo_response = geo_code.api_request(parser_response["parsed_input"])
 
             if "place_name" in geo_response:
+                status_code = 200
                 content["map"] = geo_response
                 content["map"].update(Bot().answer)
 
@@ -44,11 +45,12 @@ def process():
 
                 if "url" in wiki_response:
                     content["article"] = wiki_response
-
-    if content:
-        status_code = 200
-    else:
-        status_code = 204
+            else:
+                content = Bot().not_found
+                status_code = 204
+        else:
+            content = Bot().parse_error
+            status_code = 204
 
     return jsonify(content), status_code
 
@@ -73,23 +75,4 @@ def bot_error():
 
     content = Bot().error
 
-    if content:
-        status_code = 200
-    else:
-        status_code = 204
-
-    return jsonify(content), status_code
-
-
-@app.route("/not_found", methods=["GET"])
-def not_found():
-    """Not found message from the bot"""
-
-    content = Bot().not_found
-
-    if content:
-        status_code = 200
-    else:
-        status_code = 204
-
-    return jsonify(content), status_code
+    return jsonify(content)
