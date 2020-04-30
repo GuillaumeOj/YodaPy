@@ -45,6 +45,7 @@ def process():
 
                 if "url" in wiki_response:
                     content["article"] = wiki_response
+                    content["article"].update(Bot().found_article)
             else:
                 content = Bot().not_found
         else:

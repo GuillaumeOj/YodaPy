@@ -57,10 +57,11 @@ class Bot {
                     this.maps.createMap(result["map"]["center"]);
                 }
                 if ("article" in result) {
-                    let article = result["article"]["extract"];
-                    let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='"
+                    let article = result["article"]["bot_message"];
+                    article += "\n";
+                    article += result["article"]["extract"];
+                    article += "<br />[<a target='_blank' rel='noreferrer noopener' href='"
                         + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
-                    article = article + article_link
 
                     this.posts.newPost(article, "bot");
                 }

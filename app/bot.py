@@ -51,6 +51,11 @@ class Bot:
         return self.random_choice("answer")
 
     @property
+    def found_article(self):
+        """Return an bot message if an article was found"""
+        return self.random_choice("found_article")
+
+    @property
     def error(self):
         """Return an error message"""
         return self.random_error("error")
