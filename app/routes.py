@@ -47,12 +47,10 @@ def process():
                     content["article"] = wiki_response
             else:
                 content = Bot().not_found
-                status_code = 204
         else:
             content = Bot().parse_error
-            status_code = 204
 
-    return jsonify(content), status_code
+    return jsonify(content)
 
 
 @app.route("/hello", methods=["GET"])

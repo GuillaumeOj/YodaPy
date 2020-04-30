@@ -72,9 +72,7 @@ class Bot {
                 })
                     .then(response => response.json())
                     .then(result => {
-                        for (message of result["bot_messages"]) {
-                            this.posts.newPost(message, "bot");
-                        }
+                        this.posts.newPost(result["bot_error"], "bot");
                     })
                     .catch(error => console.log(error));
             });
