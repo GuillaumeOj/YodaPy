@@ -35,39 +35,56 @@ class Bot {
             body: formData,
             headers: this.HttpHeaders
         })
-            .then(response => response.json())
-            .then(result =>  {
+            .then(response => {
                 this.feed.waitOff();
-                if (Object.keys(result).length === 0) { // Si le résultat est nul
-                    this.posts.newPost("Je trouve pô !", "bot");
+                let status_code = response.status;
+                if (status_code == 200) {
+                    return response.json();
+                } else if (status_code == 204) {
+                    throw new Error("Not found");
                 } else {
-                    if ("map" in result) {
-                        this.posts.newPost(result["map"]["place_name"], "bot");
-                        this.maps.createMap(result["map"]["center"]);
-                    }
-                    if ("article" in result) {
-                        let article = result["article"]["extract"];
-                        let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='"
-                            + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
-                        article = article + article_link
-                        this.posts.newPost(article, "bot");
-                    }
+                    throw new Error("Fatal error");
+                }
+            })
+            .then(result =>  {
+                if ("map" in result) {
+                    this.posts.newPost(result["map"]["place_name"], "bot");
+                    this.maps.createMap(result["map"]["center"]);
+                }
+                if ("article" in result) {
+                    let article = result["article"]["extract"];
+                    let article_link = "<br />[<a target='_blank' rel='noreferrer noopener' href='"
+                        + result["article"]["url"] + "'>Lire la suite sur Wikipédia</a>]";
+                    article = article + article_link
+                    this.posts.newPost(article, "bot");
                 }
             })
             .catch(error => {
-                this.feed.waitOff()
-                console.log(error)
-                fetch("/error", {
-                    method: "GET",
-                    headers: this.HttpHeaders
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        for (message of result["bot_messages"]) {
-                            this.posts.newPost(message, "bot");
-                        }
+                if (error.message == "Not found") {
+                    fetch("/not_found", {
+                        method: "GET",
+                        headers: this.HttpHeaders
                     })
-                    .catch(error => console.log(error));
+                        .then(response => response.json())
+                        .then(result => {
+                            for (message of result["bot_messages"]) {
+                                this.posts.newPost(message, "bot");
+                            }
+                        })
+                        .catch(error => console.log(error));
+                } else {
+                    fetch("/error", {
+                        method: "GET",
+                        headers: this.HttpHeaders
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            for (message of result["bot_messages"]) {
+                                this.posts.newPost(message, "bot");
+                            }
+                        })
+                        .catch(error => console.log(error));
+                }
             });
     }
 
