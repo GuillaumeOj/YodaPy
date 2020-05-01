@@ -19,7 +19,11 @@ class GeoCode:
         quoted_query = quote(query_text)
         url = f"{self.geo_url}/{quoted_query}.json"
 
-        parameters = {"access_token": self.geo_token}
+        parameters = {
+            "access_token": self.geo_token,
+            "autocomplete": False,
+            "language": "fr",
+        }
 
         response = requests.get(url, params=parameters)
 
@@ -28,20 +32,24 @@ class GeoCode:
 
         # Return a list of features if response is ok
         if response.ok:
-            features = response.json()["features"]
+            features = response.json()
 
-            locations = [
-                {
-                    "relevance": feature["relevance"],
-                    "text": feature["text"],
-                    "place_name": feature["place_name"],
-                    "center": feature["center"],
-                }
-                for feature in features
-            ]
+            if "features" in features:
+                features = features["features"]
 
-            if locations:
-                # Keep only one location in the list with the best relevance
-                content = max(locations, key=lambda location: location["relevance"])
+                locations = [
+                    {
+                        "relevance": feature["relevance"],
+                        "text_fr": feature["text"],
+                        "place_name_fr": feature["place_name"],
+                        "longitude": feature["center"][0],
+                        "latitude": feature["center"][-1],
+                    }
+                    for feature in features
+                ]
+
+                if locations:
+                    # Keep only one location in the list with the best relevance
+                    content = max(locations, key=lambda location: location["relevance"])
 
         return content

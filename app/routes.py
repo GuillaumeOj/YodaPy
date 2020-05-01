@@ -39,14 +39,16 @@ def process():
             geo_code = GeoCode()
             geo_response = geo_code.api_request(parser_response["parsed_input"])
 
-            if "place_name" in geo_response:
+            if "place_name_fr" in geo_response:
                 status_code = 200
                 content["map"] = geo_response
                 content["map"].update(bot.found_place)
 
                 # Send the coordinates to wikipedia
                 wiki_search = WikiSearch()
-                wiki_response = wiki_search.search_article(content["map"]["text"])
+                wiki_response = wiki_search.geo_search_article(
+                    content["map"]["latitude"], content["map"]["longitude"]
+                )
 
                 if "url" in wiki_response:
                     content["article"] = wiki_response

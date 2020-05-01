@@ -4,7 +4,7 @@ class BotMap {
         this.feed = feed;
     }
 
-    createMap(coordinates) {
+    createMap(latitude, longitude) {
         this.mapId++;
 
         // Create a container for the map
@@ -18,7 +18,7 @@ class BotMap {
         let map = new mapboxgl.Map({
             container: mapDiv.id, // Container ID
             style: "mapbox://styles/mapbox/streets-v10", // Map style to use
-            center: coordinates,// Starting position [lng, lat]
+            center: [longitude, latitude],// Starting position [lng, lat]
             zoom: 14, // Starting zoom level
         });
 
@@ -30,7 +30,7 @@ class BotMap {
 
         // Add a marker to the map
         new mapboxgl.Marker() // initialize a new marker
-            .setLngLat(coordinates) // Marker [lng, lat] coordinates
+            .setLngLat([longitude, latitude]) // Marker [lng, lat] coordinates
             .addTo(map); // Add the marker to the map
     }
 }

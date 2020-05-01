@@ -54,10 +54,10 @@ class Bot {
                 if ("map" in result) {
                     let postMessage = result["map"]["bot_message"];
                     postMessage += "\n";
-                    postMessage += result["map"]["place_name"];
+                    postMessage += result["map"]["place_name_fr"];
 
                     this.posts.newPost(postMessage, "bot");
-                    this.maps.createMap(result["map"]["center"]);
+                    this.maps.createMap(result["map"]["latitude"], result["map"]["longitude"]);
                 }
                 if ("article" in result) {
                     let article = result["article"]["bot_message"];

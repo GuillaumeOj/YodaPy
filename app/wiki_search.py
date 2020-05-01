@@ -14,14 +14,14 @@ class WikiSearch:
         self.wiki_api_url = app.config["WIKI_API_URL"]
         self.wiki_url = app.config["WIKI_URL"]
 
-    def search_article(self, query_text):
+    def geo_search_article(self, latitude, longitude):
         """Get articles near coordinates and return one choose randomly."""
         # Query parameters
         parameters = {
             "action": "query",
             "format": "json",
-            "generator": "search",
-            "gsrsearch": query_text,
+            "generator": "geosearch",
+            "ggscoord": f"{latitude}|{longitude}",
             "prop": "extracts",
             "exintro": True,
             "explaintext": True,
