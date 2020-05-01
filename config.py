@@ -35,6 +35,7 @@ class Config:
     # Information about the geo_code API
     # This project use Mapbox https://www.mapbox.com/
     GEO_TOKEN = os.environ.get("GEO_TOKEN") or "This-is-a-foo-tooken"
+    PUBLIC_GEO_TOKEN = os.environ.get("PUBLIC_GEO_TOKEN") or "This-is-a-foo-tooken"
     GEO_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
 
     # Url for the french wikipedia's API
