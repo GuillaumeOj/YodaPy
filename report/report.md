@@ -19,6 +19,15 @@ L'application est déployée sur la plateforme Heroku à l'adresse suivante :
 Pour finir, les users stories utilisées pour l'élaboration de l'application sont disponibles ici :
     => https://trello.com/b/P17ksldE/yodapy
 
+Le but de ce projet est de créer une application web tout en manipulant un certain nombre de conaissance :
+
+- utilisation d'API,
+- utilisation d'un framework (FLASK),
+- utilisation du javascript (y compris AJAX),
+- déploiement d'une application en ligne,
+- réalisation d'une interface responsive (HTML5 + CSS3),
+- et bien entendu utilisation du langage Python.
+
 # II. Démarche
 
 L'application suit le fonctionnement suivant.
