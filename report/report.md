@@ -26,6 +26,7 @@ Le but de ce projet est de créer une application web tout en manipulant un cert
 - utilisation du JavaScript (y compris AJAX),
 - déploiement d'une application en ligne,
 - réalisation d'une interface responsive (HTML5 + CSS3),
+- mise en place de tests (module Pytest) pour un projet en mode TDD,
 - et bien entendu utilisation du langage Python.
 
 # II. Démarche
