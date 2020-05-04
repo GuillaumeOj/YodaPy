@@ -1,5 +1,5 @@
 ---
-title: Projet 7 - Créez GrandPy Bot, le papy-robot 🤖 👴
+title: Projet 7 - Créez GrandPy Bot, le papy-robot
 subtitle: Parcours OpenClassrooms - Développeur d'application Python
 author:
   - 'Etudiant : Guillaume OJARDIAS'
@@ -46,3 +46,7 @@ L'application suit le fonctionnement suivant.
 6. Pour finir, l'application fait appel à un module appelé `Bot`permettant de retourner des phrases selon le contexte (adresse trouvée, article trouvé, demande non comprise, erreur grave, etc.)
 7. Toute ces informations sont  retournées à la page principale sous forme de JSON.
 8. Le script JavaScript reçoit le résultat de la requête AJAX et affiche dans le fil des messages sous forme de différents posts les informations retournées.
+
+# III. Bilan du projet
+
+
