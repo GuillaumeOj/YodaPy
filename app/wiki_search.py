@@ -7,8 +7,7 @@ from app import app
 
 
 class WikiSearch:
-    """WikiSearch.
-    Search articles around geographics coordinates."""
+    """Search articles around geographics coordinates."""
 
     def __init__(self):
         self.wiki_api_url = app.config["WIKI_API_URL"]
