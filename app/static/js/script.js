@@ -1,9 +1,7 @@
 class Bot {
     constructor(feed, form, waiting) {
         this.feed = new Feed(feed, waiting);
-
         this.maps = new BotMap(this.feed);
-
         this.posts = new Post(this.feed);
 
         this.form = form;
@@ -12,7 +10,6 @@ class Bot {
 
         this.HttpHeaders = new Headers();
         this.HttpHeaders.append("Keep-Alive", "timeout=10");
-
 
         this.sayHello();
         this.clearForm();
@@ -101,6 +98,7 @@ let feed = document.getElementById("feed");
 let form = document.getElementById("form");
 let waiting = document.getElementById("waiting");
 
+// Init the bot !
 let bot = new Bot(feed, form, waiting);
 
 bot.user_input.addEventListener("keydown", event =>  {
