@@ -11,6 +11,13 @@ a {
     color: #454955;
 }
 
+div, textarea, input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
 /* Main container for the app */
 #container {
     display: grid;
@@ -95,8 +102,8 @@ footer a:hover {
 
 /* Content of the app */
 #content {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0 10px 0;
+    padding: 0 2px 0 2px;
     display: grid;
     grid-template-rows: 1fr 50px;
     grid-gap: 10px;
@@ -182,18 +189,13 @@ footer a:hover {
 }
 
 #writing form {
-    margin-left : 10px;
-    margin-right: 10px;
     display: grid;
-    grid-template-columns: 1fr 80px;
-    column-gap: 10px;
+    grid-template-columns: 1fr 50px;
+    height: 100%;
 }
 
 #message {
-    margin-left: 5px;
-    padding: 5px;
-    padding-left: 15px;
-    display: block;
+    padding: 5px 5px 5px 15px;
     grid-column: 1;
     background: black;
     border: 1px solid #343434;
@@ -210,18 +212,16 @@ footer a:hover {
 
 #submit {
     -webkit-appearance: none;
-    display: block;
-    margin: 0;
     grid-column: 2;
-    background: #52489c;
-    border: 1px solid #2c1e99;
-    border-radius: 5px;
+    background: none;
+    border: none;
     color: #f0f7ee;
-    font-size: 14px;
+    font-size: 30px;
+    width: 50px;
 }
 
 #submit:hover {
-    box-shadow: 0 0 20px #52489c;
+    color: #52489c;
 }
 
 #http_error {

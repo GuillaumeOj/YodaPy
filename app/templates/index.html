@@ -12,8 +12,8 @@
     <div id="writing">
         <form id="form" action="" method="post" novalidate>
             {{ form.hidden_tag() }}
-            {{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu") }}
-            {{ form.submit() }}
+            {{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu", maxlength="200") }}
+            {{ form.submit(value="", class="nerd-font") }}
         </form>
     </div>
 </div>
