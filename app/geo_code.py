@@ -40,8 +40,8 @@ class GeoCode:
                 locations = [
                     {
                         "relevance": feature["relevance"],
-                        "text_fr": feature["text"],
-                        "place_name_fr": feature["place_name"],
+                        "text_fr": feature["text_fr"],
+                        "place_name_fr": feature["place_name_fr"],
                         "longitude": feature["center"][0],
                         "latitude": feature["center"][-1],
                     }
