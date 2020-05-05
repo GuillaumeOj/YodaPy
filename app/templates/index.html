@@ -13,11 +13,11 @@
         <form id="form" method="post" novalidate>
             {{ form.hidden_tag() }}
             {{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu", maxlength="200") }}
-            {{ form.submit(value="", class="nerd-font") }}
+            <button id="submit" class="nf nf-fa-resistance"></button>
         </form>
     </div>
 </div>
-<script type="text/javascript">
+<script>
     mapboxgl.accessToken = "{{ config['PUBLIC_GEO_TOKEN'] }}";
 </script>
 <script src="{{ url_for('static', filename='js/post.js') }}"></script>

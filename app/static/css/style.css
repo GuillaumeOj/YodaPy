@@ -11,7 +11,7 @@ a {
     color: #454955;
 }
 
-div, textarea, input {
+div, textarea, button {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
