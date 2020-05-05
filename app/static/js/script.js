@@ -13,6 +13,7 @@ class Bot {
 
         this.sayHello();
         this.clearForm();
+		window.scrollTop = 0;
     }
 
     clearForm () {
