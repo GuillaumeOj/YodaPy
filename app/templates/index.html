@@ -10,7 +10,7 @@
         </div>
     </div>
     <div id="writing">
-        <form id="form" action="" method="post" novalidate>
+        <form id="form" method="post" novalidate>
             {{ form.hidden_tag() }}
             {{ form.message(autofocus="", placeholder="Demandez à Yoda de trouver un lieu", maxlength="200") }}
             {{ form.submit(value="", class="nerd-font") }}
@@ -20,8 +20,8 @@
 <script type="text/javascript">
     mapboxgl.accessToken = "{{ config['PUBLIC_GEO_TOKEN'] }}";
 </script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/post.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/feed.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/botmap.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/post.js') }}"></script>
+<script src="{{ url_for('static', filename='js/feed.js') }}"></script>
+<script src="{{ url_for('static', filename='js/botmap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}

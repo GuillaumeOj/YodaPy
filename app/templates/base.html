@@ -2,47 +2,46 @@
 <html lang="fr">
 
 <head>
-	{% if title: %}
-	<title>{{ title }} - {{ config['BOT_NAME'] }}</title>
-	{% else: %}
-	<title>{{ config['BOT_NAME'] }}</title>
-	{% endif %}
-	<meta charset="utf-8" />
-	<!-- Settings for mapbox -->
-	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-	<script src='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
-	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js'></script>
-	<link href='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet' />
-	<!-- End of settings for mapbox -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/mini-nerd-fonts.css') }}" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    {% if title: %}
+    <title>{{ title }} - {{ config['BOT_NAME'] }}</title>
+    {% else: %}
+    <title>{{ config['BOT_NAME'] }}</title>
+    {% endif %}
+    <meta charset="utf-8" />
+    <!-- Settings for mapbox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- End of settings for mapbox -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mini-nerd-fonts.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 
 <body>
-	<div id="container">
-		<header>
-			<div id="logo"><img src="{{ config['LOGO'] }}" alt="logo" /></div>
-			<div id="catchphrase">
-				<h1>{{ config['BOT_NAME'] }}</h1>
-				<h2>{{ config['CATCHPHRASE'] }}</h2>
-			</div>
-		</header>
-		{% block content %}{% endblock %}
-		<footer>
-			<p id="author">
-				{% if config['PROFILE_LINK']: %}
-				Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a>
-				{% else: %}
-				Réalisé par {{ config['AUTHOR'] }}
-				{% endif %}
-			</p>
-			<ul id="social_links">
-				{% for link in config['SOCIAL_LINKS'] %}
-				<li><a href="{{ link['url'] }}"><span class="nf {{ link['class'] }}"></span></a></li>
-				{% endfor %}
-			</ul>
-		</footer>
-	</div>
+    <div id="container">
+        <header>
+            <div id="logo"><img src="{{ config['LOGO'] }}" alt="logo" /></div>
+            <div id="catchphrase">
+                <h1>{{ config['BOT_NAME'] }}</h1>
+                <h2>{{ config['CATCHPHRASE'] }}</h2>
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+        <footer>
+            <p id="author">
+                {% if config['PROFILE_LINK']: %}
+                Réalisé par <a href="{{ config['PROFILE_LINK'] }}">{{ config['AUTHOR'] }}</a>
+                {% else: %}
+                Réalisé par {{ config['AUTHOR'] }}
+                {% endif %}
+            </p>
+            <ul id="social_links">
+                {% for link in config['SOCIAL_LINKS'] %}
+                <li><a href="{{ link['url'] }}"><span class="nf {{ link['class'] }}"></span></a></li>
+                {% endfor %}
+            </ul>
+        </footer>
+    </div>
 </body>
 
 </html>
