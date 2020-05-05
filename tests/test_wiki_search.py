@@ -24,6 +24,9 @@ class TestWikiSearch:
             },
         ]
 
+        latitude = 1
+        longitude = 1
+
         class MockRequestGet:
             def __init__(self, url, params=None):
                 self.ok = True
@@ -45,6 +48,6 @@ class TestWikiSearch:
 
         monkeypatch.setattr("requests.get", MockRequestGet)
 
-        result = WikiSearch().search_article("query_text")
+        result = WikiSearch().geo_search_article(latitude, longitude)
 
         assert result == articles[1]
