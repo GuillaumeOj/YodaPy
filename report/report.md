@@ -14,20 +14,20 @@ Le but du projet est de créer un chatbot permettant à l'utilisateur de trouver
 Le code source du projet est disponible à l'adresse suivante :
     => https://github.com/GuillaumeOj/YodaPy
 
-L'application est déployée sur la plateforme Heroku à l'adresse suivante :
+L'application est déployée sur la plateforme Heroku :
     => https://yoda-py.herokuapp.com/
 
 Pour finir, les users stories utilisées pour l'élaboration de l'application sont disponibles ici :
     => https://trello.com/b/P17ksldE/yodapy
 
-Le but de ce projet est de créer une application web tout en manipulant un certain nombre de connaissance :
+Cette application web, nous permet de mettre en œuvre un certain nombre de connaissances :
 
-- utilisation d'API,
-- utilisation d'un framework (FLASK),
-- utilisation du JavaScript (y compris AJAX),
-- déploiement d'une application en ligne,
-- réalisation d'une interface responsive (HTML5 + CSS3),
-- mise en place de tests (module Pytest) pour un projet en mode TDD,
+- l'utilisation d'API,
+- l'utilisation d'un framework (FLASK),
+- l'utilisation du JavaScript (y compris AJAX),
+- le déploiement d'une application en ligne,
+- la réalisation d'une interface responsive (HTML5 + CSS3),
+- la mise en place de tests (module Pytest) pour un projet en mode TDD,
 - et bien entendu utilisation du langage Python.
 
 # II. Démarche
