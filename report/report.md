@@ -96,7 +96,7 @@ J'ai donc passé beaucoup de temps à faire des tests de requêtes et lire les d
 
 # IV. Conclusion
 
-Au final, ce projet m'aura apporté énormément de satisfaction. Il s'agit du deuxième projet sur le parcours permettant la mise en place d'une application avec une interface "graphique". Et donc une application un peu "waouh" que l'on ai fier de montrer aux autres (même si les "profanes" ont souvent une réaction du style "oui et alors ?")
+Au final, ce projet m'aura apporté énormément de satisfaction. Il s'agit du deuxième projet sur le parcours permettant la création d'une application avec une interface "graphique". Et donc une application un peu "waouh" que l'on ai fier de montrer aux autres.
 
-Il m'aura surtout appris à bien mettre en œuvre un précepte que tout bon développeur doit suivre dans sa vie professionnelle "Read The Damn Manual" (pour la version polie). Puisque ce projet, au-delà du fait que j'ai du utiliser de nouveau langage nous pousse à utiliser des outils "tierce" que ce soit des API, des packages ou des frameworks.
-Or les différents tutoriels et cours que l'on peut trouver au grès des recherches internet sont un bon moyen de se mettre le pieds à l'étrier, mais quand il s'agit de pousser l’utilisation plus loin, rien de tel que la documentation officielle !
+J'ai appris à mettre en œuvre un précepte que tout bon développeur doit suivre dans sa vie professionnelle "Read The Damn Manual" (pour la version polie). Puisque ce projet, au-delà du fait que j'ai utilisé de nouveaux langages, nous pousse à utiliser des outils "tierce" que ce soit des API, des packages ou des frameworks.
+Or les différents tutoriels et cours que l'on peut trouver au grès des recherches internet sont un bon moyen de mettre le pied à l'étrier, mais quand il s'agit de pousser l’utilisation plus loin, rien de tel qu'une documentation officielle !
