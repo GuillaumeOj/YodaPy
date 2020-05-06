@@ -34,17 +34,21 @@ Cette application web, nous permet de mettre en œuvre un certain nombre de conn
 
 L'application suit le fonctionnement suivant.
 
-1. L'utilisateur écrit un message, puis le soumet (touche `<Enter>` ou bouton `Envoyer`)
+1. L'utilisateur écrit un message, puis l'envoi (touche `<Enter>` ou bouton `Envoyer`)
 2. Un script JavaScript récupère le contenu du message, l'affiche dans un fil de discussion et l'envoi (en AJAX) à une page `/process` de l'application.
 3. Sur la page `/process`, l'entrée utilisateur est envoyée à un `parser` qui va "normaliser" le message de la manière suivante :
     a. texte en minuscule, suppression des caractères accentués,
-    b. séparation du texte en liste de phrase,
-    c. répète la phrase contenant la question posée au bot,
-    d. suppression des mots inutiles (stopwords),
-    e. retour de la donnée
-4. Une fois l'entrée utilisateur "parsé", celle-ci est envoyée à un module permettant la recherche de coordonnées géographique d'un lieu grâce à une recherche textuelle. Ici, le module fait appel à l'API fournie par [MapBox](https://www.mapbox.com/). Le module fait un choix de lieu (parmi la liste retournée par MapBox) en se basant sur l'indice `relevance` fourni par l'API et retourne les données sous forme de dictionnaire.
-5. Les informations retournées par le module de recherche géographique, sont ensuite envoyées à un module permettant la recherche d'article sur la plateforme Wikipédia. Ce module va utiliser les coordonnées géographique du lieu pour faire une recherche Wikipédia grâce à l'API `GeoSearch` fournie par Wikipédia. Si un article existe, celui-ci est retournée à l'application toujours sous forme de dictionnaire.
-6. Pour finir, l'application fait appel à un module appelé `Bot`permettant de retourner des phrases selon le contexte (adresse trouvée, article trouvé, demande non comprise, erreur grave, etc.)
+    b. séparation du texte en liste de phrases,
+    c. cherche la phrase contenant le lieu cherché par l'utilisateur,
+    d. suppression des mots "inutiles" (stopwords).
+4. Si le parser retourne une valeur (mots clefs), ceux-ci sont envoyés à un module permettant la recherche de coordonnées géographique d'un lieu. Ici, le module fait appel à l'API fournie par [MapBox](https://www.mapbox.com/).
+    a. envoi d'une requête à l'API précisant les mots clefs de la recherche et les paramètres (langue du résultat, token utilisateur, paramètres supplémentaires),
+    b. le module fait un choix (parmi la liste retournée par l'API) en se basant sur l'indice `relevance` fourni dans le résultat.
+5. Si le module de recherche géographique renvoi un résultat, les coordonnées géographiques sont envoyées au module permettant la recherche d'article [Wikipédia](https://fr.wikipedia.org/wiki/Wikip%C3%A9dia).
+    a. envoi d'une requête à l'API précisant les coordonnées à utiliser pour la recherche ainsi que les paramètres précisant les informations souhaitées (extrait d'article, titre de l'article),
+    b. le module choisie l'article avec l'index le plus petit,
+    c. une URL vers l'article est reconstituée (non fournie dans le résultat)
+6. Pour les étapes 4 et 5, on fait appel au module `Bot` permettant de retourner des phrases selon le contexte (adresse trouvée, article trouvé, demande non comprise, erreur grave, etc.)
 7. Toute ces informations sont  retournées à la page principale sous forme de JSON.
 8. Le script JavaScript reçoit le résultat de la requête AJAX et affiche dans le fil des messages sous forme de différents posts les informations retournées.
 
