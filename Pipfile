@@ -16,6 +16,7 @@ doq = "*"
 black = "*"
 python-dotenv = "*"
 requests = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.8"
