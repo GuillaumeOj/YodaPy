@@ -13,7 +13,7 @@ from app.bot import Bot
 bot = Bot()
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
     """Landing page"""
     form = MessageFieldsForm()
@@ -22,7 +22,7 @@ def index():
 
 @app.route("/process", methods=["POST"])
 def process():
-    """Process page"""
+    """Process the user input"""
 
     content = {}
 
@@ -63,7 +63,7 @@ def process():
 
 @app.route("/hello", methods=["GET"])
 def hello():
-    """Hello page"""
+    """Say hello to user and send instructions"""
 
     content = bot.hello
 
