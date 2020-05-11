@@ -16,13 +16,14 @@ geometry: margin=1.5cm
 Le but du projet est de créer un chatbot permettant à l'utilisateur de trouver l'adresse d'un lieu ainsi que d'avoir plus d'informations au sujet de ce lieu grâce à extrait d'article Wikipédia.
 
 Le code source du projet est disponible à l'adresse suivante :
-    => https://github.com/GuillaumeOj/YodaPy
+    => [github.com/GuillaumeOj/YodaPy](https://github.com/GuillaumeOj/YodaPy)
 
 L'application est déployée sur la plateforme Heroku :
-    => https://yoda-py.herokuapp.com/
+    => [yoda-py.herokuapp.com/](https://yoda-py.herokuapp.com/)
 
 Pour finir, les users stories utilisées pour l'élaboration de l'application sont disponibles ici :
-    => https://trello.com/b/P17ksldE/yodapy
+    => [trello.com/b/P17ksldE/yodapy](https://trello.com/b/P17ksldE/yodapy)
+
 
 Cette application web, nous permet de mettre en œuvre un certain nombre de connaissances :
 
@@ -56,6 +57,7 @@ L'application suit le fonctionnement suivant.
 7. Toute ces informations sont  retournées à la page principale sous forme de JSON.
 8. Le script JavaScript reçoit le résultat de la requête AJAX et affiche dans le fil des messages sous forme de différents posts les informations retournées.
 
+\pagebreak
 # III. Bilan
 
 ## 1. Les tests
@@ -72,7 +74,7 @@ De ce que je connaissais du langage (c'est à dire pas grand chose), le JavaScri
 
 Finalement aujourd'hui j'ai une vision plus large des possibilités offertes par le langage. Cependant, je me rends compte aussi que son apprentissage n'est pas aussi "simple" que celui du langage Python. En effet étant donné l'évolution rapide qu'il a subit ces dernières années, trouver des ressources à jour n'est pas chose aisée.
 
-La possibilité était donnée d'utiliser JQuery sur ce projet (un framework), j'ai délibérément choisi de ne pas en faire l'usage pour me confronter au langage brut sur un projet de petite envergure.
+La possibilité était donnée d'utiliser JQuery sur ce projet (une librairie), j'ai délibérément choisi de ne pas en faire l'usage pour me confronter au langage brut sur un projet de petite envergure.
 
 ## 3. Flask
 
