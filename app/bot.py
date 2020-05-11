@@ -1,17 +1,16 @@
+"""Choose random messages from the bot"""
 import os.path
 import json
 from random import choice
 
-from app import app
-
-current_dir = os.path.abspath(os.path.dirname(__file__))
+CURRENT_DIT = os.path.abspath(os.path.dirname(__file__))
 
 
 class Bot:
     """Used for generate text from the bot"""
 
     def __init__(self):
-        json_path = os.path.join(current_dir, "static/json/yoda.json")
+        json_path = os.path.join(CURRENT_DIT, "static/json/yoda.json")
         with open(json_path) as json_file:
             self.bot_dict = json.load(json_file)
 

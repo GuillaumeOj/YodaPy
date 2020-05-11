@@ -1,12 +1,10 @@
+"""Parse the user input"""
 import unicodedata
 import os.path
 import json
-import string
 
-from flask import Response
-from app import app
 
-current_dir = os.path.abspath(os.path.dirname(__file__))
+CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Parser:
@@ -16,13 +14,13 @@ class Parser:
         self.parsed_input = ""
 
         # Load stopwords from a json file
-        stopwords_path = os.path.join(current_dir, "static/json/stopwords.json")
+        stopwords_path = os.path.join(CURRENT_DIR, "static/json/stopwords.json")
         self.stopwords = []
         with open(stopwords_path) as json_f:
             self.stopwords = json.load(json_f)
 
         # Load keywords for the question from a json file
-        keywords_path = os.path.join(current_dir, "static/json/keywords.json")
+        keywords_path = os.path.join(CURRENT_DIR, "static/json/keywords.json")
         self.keywords = []
         with open(keywords_path) as json_f:
             self.keywords = json.load(json_f)

@@ -1,9 +1,10 @@
+"""Config file for the application"""
 import os
 
-current_dir = os.path.abspath(os.path.dirname(__file__))
 
+class Config:  # pylint: disable=too-few-public-methods
+    """Configuration"""
 
-class Config:
     LOGO = "https://img.icons8.com/color/130/000000/baby-yoda.png"
     BOT_NAME = "YodaPy"
     CATCHPHRASE = "Sur YodaPy le bienvenue tu es !"

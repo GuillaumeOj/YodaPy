@@ -1,17 +1,19 @@
-import requests
+"""Use the Wikiepedia API"""
 from urllib.parse import urljoin, quote
 
-from flask import Response
+import requests
 
-from app import app
+from app import APP  # pylint: disable=cyclic-import
 
 
 class WikiSearch:
     """Search articles around geographics coordinates."""
 
+    # pylint: disable=too-few-public-methods
+
     def __init__(self):
-        self.wiki_api_url = app.config["WIKI_API_URL"]
-        self.wiki_url = app.config["WIKI_URL"]
+        self.wiki_api_url = APP.config["WIKI_API_URL"]
+        self.wiki_url = APP.config["WIKI_URL"]
 
     def geo_search_article(self, latitude, longitude):
         """Get articles near coordinates and return one choose randomly."""
@@ -40,7 +42,6 @@ class WikiSearch:
                 articles = list(articles.values())
 
                 # Keep only the data we need
-                app.logger.info(articles)
                 articles = [
                     {
                         "index": article["index"],

@@ -1,17 +1,17 @@
-import requests
-import json
+"""Geo code interact with MapBox API"""
 from urllib.parse import quote
 
-from flask import Response
-from app import app
+import requests
+
+from app import APP  # pylint: disable=cyclic-import
 
 
-class GeoCode:
+class GeoCode:  # pylint: disable=too-few-public-methods
     """Send a query to a geocoding api for getting informations about a place."""
 
     def __init__(self):
-        self.geo_token = app.config["GEO_TOKEN"]
-        self.geo_url = app.config["GEO_URL"]
+        self.geo_token = APP.config["GEO_TOKEN"]
+        self.geo_url = APP.config["GEO_URL"]
 
     def api_request(self, query_text):
         """Get informations about a place with a query from a user."""
