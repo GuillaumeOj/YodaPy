@@ -12,7 +12,7 @@ from app.bot import Bot
 BOT = Bot()
 
 
-@APP.route("/", methods=["GET"])
+@APP.route("/")
 def index():
     """Landing page"""
     form = MessageFieldsForm()
