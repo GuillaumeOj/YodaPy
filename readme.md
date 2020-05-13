@@ -69,6 +69,7 @@ pipenv shell
 For working, the application need a .env file in root with:
 ```
 GEO_TOKEN={type_your_mapbox_token_here}
+PUBLIC_GEO_TOKEN={type_your_mapbox_public_token_here}
 ```
 
 ## Run the app
