@@ -82,7 +82,9 @@ class Parser:
         splited_question = removed_hyphens.split()
 
         # Remove keywords
-        parsed_question = [word for word in splited_question if word not in self.keywords]
+        parsed_question = [
+            word for word in splited_question if word not in self.keywords
+        ]
 
         # Remove stopwords
         parsed_question = [
