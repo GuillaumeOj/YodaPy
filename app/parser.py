@@ -1,8 +1,7 @@
 """Parse the user input"""
-import unicodedata
-import os.path
 import json
-
+import os.path
+import unicodedata
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
