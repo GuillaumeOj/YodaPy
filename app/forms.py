@@ -1,7 +1,7 @@
 """Forms from flask"""
 # pylint: disable=import-error
 from flask_wtf import FlaskForm
-from wtforms import TextAreaField, SubmitField
+from wtforms import SubmitField, TextAreaField
 
 
 class MessageFieldsForm(FlaskForm):

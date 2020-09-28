@@ -1,6 +1,6 @@
 """Choose random messages from the bot"""
-import os.path
 import json
+import os.path
 from random import choice
 
 CURRENT_DIT = os.path.abspath(os.path.dirname(__file__))
