@@ -3,6 +3,7 @@ import json
 import os.path
 import unicodedata
 
+
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -81,9 +82,7 @@ class Parser:
         splited_question = removed_hyphens.split()
 
         # Remove keywords
-        parsed_question = [
-            word for word in splited_question if word not in self.keywords
-        ]
+        parsed_question = [word for word in splited_question if word not in self.keywords]
 
         # Remove stopwords
         parsed_question = [
