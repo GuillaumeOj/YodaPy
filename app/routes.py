@@ -1,6 +1,7 @@
 """Views used by the application"""
-from flask import (jsonify, render_template,  # pylint: disable=import-error
-                   request)
+from flask import jsonify  # pylint: disable=import-error
+from flask import render_template
+from flask import request
 
 from app import APP  # pylint: disable=cyclic-import
 from app.bot import Bot
@@ -8,6 +9,7 @@ from app.forms import MessageFieldsForm
 from app.geo_code import GeoCode
 from app.parser import Parser
 from app.wiki_search import WikiSearch
+
 
 BOT = Bot()
 

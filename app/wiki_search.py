@@ -1,5 +1,6 @@
 """Use the Wikiepedia API"""
-from urllib.parse import quote, urljoin
+from urllib.parse import quote
+from urllib.parse import urljoin
 
 import requests
 
