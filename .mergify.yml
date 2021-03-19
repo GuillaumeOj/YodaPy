@@ -4,10 +4,21 @@ pull_request_rules:
       - "author=GuillaumeOj"
       - "label!=work-in-progress"
       - "label!=manual merge"
-      - "status-success=Travis CI - Branch"
+      - check-success~=^security/snyk
+      - "check-success=Travis CI - Branch"
     actions:
       merge:
         strict: "smart"
         method: rebase
       delete_head_branch:
         force: True
+  - name: Merge Snyk's pull requests
+    conditions:
+      - title~=^\[Snyk\]
+      - head~=^snyk-fix
+      - check-success~=^security/snyk
+      - "check-success=Travis CI - Branch"
+    actions:
+      merge:
+        strict: "smart"
+        method: rebase 
