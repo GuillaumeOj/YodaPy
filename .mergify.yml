@@ -5,6 +5,7 @@ pull_request_rules:
       - "label!=work-in-progress"
       - "label!=manual merge"
       - "check-success=Travis CI - Branch"
+      - "check-success=Travis CI - Pull Request"
     actions:
       merge:
         strict: "smart"
@@ -15,6 +16,7 @@ pull_request_rules:
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
       - "check-success=Travis CI - Branch"
+      - "check-success=Travis CI - Pull Request"
     actions:
       merge:
         strict: "smart"
