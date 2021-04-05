@@ -4,7 +4,6 @@ pull_request_rules:
       - "author=GuillaumeOj"
       - "label!=work-in-progress"
       - "label!=manual merge"
-      - check-success~=^security/snyk
       - "check-success=Travis CI - Branch"
     actions:
       merge:
@@ -12,11 +11,9 @@ pull_request_rules:
         method: rebase
       delete_head_branch:
         force: True
-  - name: Merge Snyk's pull requests
+  - name: Merge Dependabot's pull requests
     conditions:
-      - title~=^\[Snyk\]
-      - head~=^snyk-fix
-      - check-success~=^security/snyk
+      - author~=^dependabot(|-preview)\[bot\]$
       - "check-success=Travis CI - Branch"
     actions:
       merge:
