@@ -36,33 +36,6 @@ git clone https://github.com/GuillaumeOj/YodaPy.git
 
 ## Virtual environement
 
-### Virtualenv method
-
-Create a virtual environement in your directory:
-```
-virtualenv -p python3 env
-```
-or for PowerShell:
-```powershell
-virtualenv -p $env:python3 env
-```
-
-Activate your virtual environement:
-```
-source env/bin/activate
-```
-or for PowerShell:
-```powershell
-.env/scripts/activate.ps1
-```
-
-Install `requirements.txt`:
-```
-pip install -r requirements.txt
-```
-
-### Pipenv method
-
 Install the virtual environement by typing:
 ```
 pipenv install
