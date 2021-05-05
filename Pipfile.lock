@@ -39,11 +39,11 @@
         },
         "black": {
             "hashes": [
-                "sha256:bff7067d8bc25eb21dcfdbc8c72f2baafd9ec6de4663241a52fb904b304d391f",
-                "sha256:fc9bcf3b482b05c1f35f6a882c079dc01b9c7795827532f4cc43c0ec88067bbc"
+                "sha256:0e80435b8a88f383c9149ae89d671eb2095b72344b0fe8a1d61d2ff5110ed173",
+                "sha256:9dc2042018ca10735366d944c2c12d9cad6dec74a3d5f679d09384ea185d9943"
             ],
             "index": "pypi",
-            "version": "==21.4b2"
+            "version": "==21.5b0"
         },
         "certifi": {
             "hashes": [
@@ -348,10 +348,10 @@
         },
         "werkzeug": {
             "hashes": [
-                "sha256:4158aad4fdfe14d0ffe9f8ae832323e0ed90615b0354c13875f59e8a08e6a6fa",
-                "sha256:7fff67401402b565044b26c09201177e62ea212f9c9b809f7624481dd8421975"
+                "sha256:4e022c82ed0440ad1c1d6613f9a86a729e896a1f01a53cc9bff9bbe246f6e1cc",
+                "sha256:bde529cfaf9f42e94365e14b8dea5a76b0dcea8862957a4afacba996a367a8ff"
             ],
-            "version": "==2.0.0rc4"
+            "version": "==2.0.0rc5"
         },
         "wrapt": {
             "hashes": [
@@ -377,11 +377,11 @@
         },
         "black": {
             "hashes": [
-                "sha256:bff7067d8bc25eb21dcfdbc8c72f2baafd9ec6de4663241a52fb904b304d391f",
-                "sha256:fc9bcf3b482b05c1f35f6a882c079dc01b9c7795827532f4cc43c0ec88067bbc"
+                "sha256:0e80435b8a88f383c9149ae89d671eb2095b72344b0fe8a1d61d2ff5110ed173",
+                "sha256:9dc2042018ca10735366d944c2c12d9cad6dec74a3d5f679d09384ea185d9943"
             ],
             "index": "pypi",
-            "version": "==21.4b2"
+            "version": "==21.5b0"
         },
         "click": {
             "hashes": [
