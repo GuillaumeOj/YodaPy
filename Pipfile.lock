@@ -83,11 +83,11 @@
         },
         "flask-wtf": {
             "hashes": [
-                "sha256:57b3faf6fe5d6168bda0c36b0df1d05770f8e205e18332d0376ddb954d17aef2",
-                "sha256:d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
+                "sha256:0e0b8b33ff457ace4983d25a940133efb9be22922d19452f43a5183e862b9a73",
+                "sha256:2ef896e87f458d2ea2908853650fdc939d8c1fde064e992b84bad860fd1e6c04"
             ],
             "index": "pypi",
-            "version": "==0.14.3"
+            "version": "==0.15.0"
         },
         "gunicorn": {
             "hashes": [
